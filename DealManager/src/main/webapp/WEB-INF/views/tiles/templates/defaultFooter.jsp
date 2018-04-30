@@ -1,0 +1,1 @@
+<footer>copyright © Andrzej</footer>
