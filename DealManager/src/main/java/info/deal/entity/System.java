@@ -33,8 +33,8 @@ public class System {
 	@Column(name="system_owner")
 	private String systemOwner;
 	
-	@OneToOne(mappedBy = "deal")
-	private Deal deal;
+//	@OneToOne(mappedBy = "deal")
+//	private Deal deal;
 	
 	public System() {
 	}

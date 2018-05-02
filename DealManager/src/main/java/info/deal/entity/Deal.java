@@ -46,9 +46,9 @@ public class Deal {
 	@Column(name="active")
 	private Integer active;
 	
-	@OneToOne
-	@JoinColumn(name = "system_id")
-	private System system;
+//	@OneToOne
+//	@JoinColumn(name = "system_id")
+//	private System system;
 	
 	public Deal() {
 	}
@@ -109,13 +109,13 @@ public class Deal {
 		this.active = active;
 	}
 
-	public System getSystem() {
-		return system;
-	}
-
-	public void setSystem(System system) {
-		this.system = system;
-	}
+//	public System getSystem() {
+//		return system;
+//	}
+//
+//	public void setSystem(System system) {
+//		this.system = system;
+//	}
 
 	@Override
 	public String toString() {
