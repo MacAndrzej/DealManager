@@ -10,19 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-
-
 @Entity
-@Table(name="system")
-public class System {
+@Table(name="systems")
+public class Systems {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
-	
-	@Column(name="system_name")
-	private String systemName;
 	
 	@Column(name="description_of_system")
 	private String descriptionOfSystem;
@@ -30,13 +25,16 @@ public class System {
 	@Column(name="description_of_technology")
 	private String descriptionOfTechnology;
 	
+	@Column(name="system_name")
+	private String systemName;
+	
 	@Column(name="system_owner")
 	private String systemOwner;
 	
 //	@OneToOne(mappedBy = "deal")
 //	private Deal deal;
 	
-	public System() {
+	public Systems() {
 	}
 
 	public Long getId() {

@@ -13,22 +13,29 @@
        <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/defaultFooter.jsp" />  
    </definition>  
   
-   <!-- Main Page -->
+   <!-- About Page -->
    <definition name="home" extends="template-def">  
        <put-attribute name="title" value="Welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />  
    </definition>  
- 
-   <!-- Apache Tiles Page -->
-   <definition name="apachetiles" extends="template-def">  
-       <put-attribute name="title" value="ApacheTiles" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/apachetiles.jsp" />  
+   
+   <!-- List Deals Page -->
+    <definition name="listDeals" extends="template-def">  
+       <put-attribute name="title" value="listDeals" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/listDeals.jsp" />  
    </definition>  
-       
-   <!-- Spring MVC Page -->
-   <definition name="springmvc" extends="template-def">  
-       <put-attribute name="title" value="SpringMVC" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/springmvc.jsp" />  
+   
+    <!-- List Active Deals Page -->
+    <definition name="listDeals" extends="template-def">  
+       <put-attribute name="title" value="listDeals" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/listActiveDeals.jsp" />  
    </definition>  
+   
+     <!-- List Systems Page -->
+    <definition name="listSystems" extends="template-def">  
+       <put-attribute name="title" value="listSystems" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/listSystems.jsp" />  
+   </definition>  
+   
   
 </tiles-definitions>

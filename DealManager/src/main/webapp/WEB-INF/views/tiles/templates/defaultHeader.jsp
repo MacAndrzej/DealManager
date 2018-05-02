@@ -1,3 +1,3 @@
 <header>
-  <h1>Welcome to Deal Manager</h1>
+  <h1>Deal Manager</h1>
 </header>
