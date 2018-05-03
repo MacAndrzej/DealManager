@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -42,9 +44,9 @@ public class Deal {
 	@Column(name="active")
 	private Integer active;
 	
-//	@OneToOne
-//	@JoinColumn(name = "system_id")
-//	private System system;
+	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.LAZY)
+	@JoinColumn(name = "system_id")
+	private Systems systems;
 	
 	public Deal() {
 	}
@@ -105,20 +107,22 @@ public class Deal {
 		this.active = active;
 	}
 
-//	public System getSystem() {
-//		return system;
-//	}
-//
-//	public void setSystem(System system) {
-//		this.system = system;
-//	}
+	public Systems getSystem() {
+		return systems;
+	}
+
+	public void setSystem(Systems systems) {
+		this.systems = systems;
+	}
 
 	@Override
 	public String toString() {
 		return "Deal [id=" + id + ", dealNumber=" + dealNumber + ", startDate=" + startDate + ", finishDate="
 				+ finishDate + ", sumOfDeal=" + sumOfDeal + ", settlementPeriod=" + settlementPeriod + ", active="
-				+ active + "]";
+				+ active + ", systems=" + systems + "]";
 	}
+
+
 	
 
 	

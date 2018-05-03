@@ -6,11 +6,14 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import info.deal.config.HibernateConfiguration;
 import info.deal.entity.Deal;
+import info.deal.entity.Systems;
 
 @Repository
 public class DealDAOImpl implements DealDAO {
@@ -20,6 +23,8 @@ public class DealDAOImpl implements DealDAO {
 
 	@Transactional
 	public List<Deal> getDeals() {
+		
+		
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("Ustawiona sesja, przed zapytaniem");
@@ -36,6 +41,7 @@ public class DealDAOImpl implements DealDAO {
 	@Transactional
 	public List<Deal> getActiveDeals() {
 		/* get the current hibernate session */
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("Ustawiona sesja, przed zapytaniem");
 		/* create a query */

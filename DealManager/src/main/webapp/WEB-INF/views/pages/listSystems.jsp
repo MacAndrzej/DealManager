@@ -12,19 +12,19 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Id</th>
+				<th>No.</th>
+				<th>System_name</th>
 				<th>Description_of_system</th>
 				<th>Description_of_technology</th>
-				<th>System_name</th>
 				<th>System_owner</th>
 			</tr>
 		</thead>
 		<c:forEach var="listSystems" items="${systems}" varStatus="status">
 			<tr>
-				<td>${listSystems.id}</td>
+				<td>${status.count}</td>
+				<td>${listSystems.systemName}</td>
 				<td>${listSystems.descriptionOfSystem}</td>
 				<td>${listSystems.descriptionOfTechnology}</td>
-				<td>${listSystems.systemName}</td>
 				<td>${listSystems.systemOwner}</td>
 			</tr>
 		</c:forEach>

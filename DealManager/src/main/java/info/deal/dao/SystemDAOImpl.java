@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
 @Repository
@@ -29,6 +30,7 @@ public class SystemDAOImpl implements SystemDAO {
 		/* execute query and get result list */
 		List<Systems> systems = theQuery.getResultList();
 		System.out.println("Po załadowaniu do listy, przed zwrotem");
+		System.out.println("Teraz wracamy do controllera");
 		/* return the result */
 		return systems;
 	}

@@ -28,7 +28,6 @@ public class DealController {
 	public String listActiveDeals(Model theModel) {
 		List<Deal> list = dealDAO.getActiveDeals();
 		theModel.addAttribute("deals", list);
-		System.out.println();
 		return "listActiveDeals";
 	}
 

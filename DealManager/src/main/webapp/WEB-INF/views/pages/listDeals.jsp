@@ -13,10 +13,10 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Id</th>
+				<th>No.</th>
 				<th>Deal_number</th>
-				<th>Start_date</th>
-				<th>Finish_date</th>
+				<th>From</th>
+				<th>To</th>
 				<th>Sum_of_deal</th>
 				<th>Settlement_period</th>
 				<th>Active</th>
@@ -24,7 +24,7 @@
 		</thead>
 		<c:forEach var="listDeals" items="${deals}" varStatus="status">
 			<tr>
-				<td>${listDeals.id}</td>
+				<td>${status.count}</td>
 				<td>${listDeals.dealNumber}</td>
 				<td>${listDeals.startDate}</td>
 				<td>${listDeals.finishDate}</td>

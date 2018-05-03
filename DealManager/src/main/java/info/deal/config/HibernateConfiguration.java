@@ -8,6 +8,10 @@ import org.hibernate.SessionFactory;
 
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import info.deal.entity.Deal;
+import info.deal.entity.Systems;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,6 +37,7 @@ public class HibernateConfiguration {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan(new String[] { "info.deal.entity" });
+		
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
