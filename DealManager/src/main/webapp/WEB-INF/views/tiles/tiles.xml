@@ -14,7 +14,7 @@
    </definition>  
   
    <!-- About Page -->
-   <definition name="home" extends="template-def">  
+   <definition name="about" extends="template-def">  
        <put-attribute name="title" value="Welcome" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />  
    </definition>  
@@ -26,8 +26,8 @@
    </definition>  
    
     <!-- List Active Deals Page -->
-    <definition name="listDeals" extends="template-def">  
-       <put-attribute name="title" value="listDeals" />  
+    <definition name="listActiveDeals" extends="template-def">  
+       <put-attribute name="title" value="listActiveDeals" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/listActiveDeals.jsp" />  
    </definition>  
    
