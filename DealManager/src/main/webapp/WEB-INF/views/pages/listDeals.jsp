@@ -20,6 +20,7 @@
 				<th>Sum_of_deal</th>
 				<th>Settlement_period</th>
 				<th>Active</th>
+			
 			</tr>
 		</thead>
 		<c:forEach var="listDeals" items="${deals}" varStatus="status">
@@ -31,6 +32,7 @@
 				<td>${listDeals.sumOfDeal}</td>
 				<td>${listDeals.settlementPeriod}</td>
 				<td>${listDeals.active}</td>
+				
 			</tr>
 		</c:forEach>
 	</table>

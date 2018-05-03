@@ -21,7 +21,7 @@ public class DealDAOImpl implements DealDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	@Transactional
+	
 	public List<Deal> getDeals() {
 		
 		
@@ -38,7 +38,7 @@ public class DealDAOImpl implements DealDAO {
 		return deals;
 	}
 
-	@Transactional
+	
 	public List<Deal> getActiveDeals() {
 		/* get the current hibernate session */
 		

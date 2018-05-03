@@ -18,7 +18,7 @@ public class SystemDAOImpl implements SystemDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Transactional
+
 	public List<Systems> getSystems() {
 
 		/* get the current hibernate session */
