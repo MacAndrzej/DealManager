@@ -27,13 +27,13 @@ public class DealDAOImpl implements DealDAO {
 		
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-		System.out.println("Ustawiona sesja, przed zapytaniem");
+		
 		/* create a query */
 		Query<Deal> theQuery = currentSession.createQuery("from Deal", Deal.class);
-		System.out.println("Po zapytaniu, przed załadowaniem do listy");
+		
 		/* execute query and get result list */
 		List<Deal> deals = theQuery.getResultList();
-		System.out.println("Po załadowaniu do listy, przed zwrotem");
+		
 		/* return the result */
 		return deals;
 	}

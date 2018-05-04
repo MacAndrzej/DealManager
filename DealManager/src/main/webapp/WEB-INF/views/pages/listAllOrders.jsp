@@ -17,17 +17,17 @@
 <script src="${dataTable}"></script>
 <link href="${tableCss}" rel="stylesheet" />
 </head>
-
+<h3>List of all orders.</h3>
 <body>
 	<table id="myTable">
 		<thead>
 			<tr>
 				<th>No.</th>
-				<th>Deal_number</th>
-				<th>From</th>
-				<th>To</th>
-				<th>Sum_of_deal</th>
-				<th>Settlement_period</th>
+				<th>Order_number</th>
+				<th>From_date</th>
+				<th>To_date</th>
+				<th>Amount</th>
+				<th>Amount_period</th>
 				<th>Active</th>
 			</tr>
 		</thead>
@@ -35,11 +35,11 @@
 			<c:forEach var="listDeals" items="${deals}" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-					<td>${listDeals.dealNumber}</td>
-					<td>${listDeals.startDate}</td>
-					<td>${listDeals.finishDate}</td>
-					<td>${listDeals.sumOfDeal}</td>
-					<td>${listDeals.settlementPeriod}</td>
+					<td>${listDeals.orderNumber}</td>
+					<td>${listDeals.fromDate}</td>
+					<td>${listDeals.toDate}</td>
+					<td>${listDeals.amount}</td>
+					<td>${listDeals.amountPeriod}</td>
 					<td>${listDeals.active}</td>
 				</tr>
 			</c:forEach>

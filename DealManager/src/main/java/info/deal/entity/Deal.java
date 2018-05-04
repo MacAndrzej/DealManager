@@ -25,105 +25,117 @@ public class Deal {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="deal_number")
-	private String dealNumber;
+	@Column(name="order_number")
+	private String orderNumber;
 	
-	@Column(name="start_date")
-	private LocalDate startDate;
+	@Column(name="from_date")
+	private LocalDate fromDate;
 	
-	@Column(name="finish_date")
-	private LocalDate finishDate;
+	@Column(name="to_date")
+	private LocalDate toDate;
 	
-	@Column(name="sum_of_deal")
-	private Integer sumOfDeal;
+	@Column(name="amount")
+	private Integer amount;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="settlement_period")
-	private SettlementPeriod settlementPeriod;
+	@Column(name="amount_period")
+	private AmountPeriod amountPeriod;
 	
 	@Column(name="active")
 	private Integer active;
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.LAZY)
+	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.EAGER)
 	@JoinColumn(name = "system_id")
 	private Systems systems;
 	
 	public Deal() {
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getDealNumber() {
-		return dealNumber;
+
+	public String getOrderNumber() {
+		return orderNumber;
 	}
 
-	public void setDealNumber(String dealNumber) {
-		this.dealNumber = dealNumber;
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
+
+	public LocalDate getFromDate() {
+		return fromDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
+
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
 	}
 
-	public LocalDate getFinishDate() {
-		return finishDate;
+
+	public LocalDate getToDate() {
+		return toDate;
 	}
 
-	public void setFinishDate(LocalDate finishDate) {
-		this.finishDate = finishDate;
+
+	public void setToDate(LocalDate toDate) {
+		this.toDate = toDate;
 	}
 
-	public Integer getSumOfDeal() {
-		return sumOfDeal;
+
+	public Integer getAmount() {
+		return amount;
 	}
 
-	public void setSumOfDeal(Integer sumOfDeal) {
-		this.sumOfDeal = sumOfDeal;
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
-	public SettlementPeriod getSettlementPeriod() {
-		return settlementPeriod;
+
+	public AmountPeriod getAmountPeriod() {
+		return amountPeriod;
 	}
 
-	public void setSettlementPeriod(SettlementPeriod settlementPeriod) {
-		this.settlementPeriod = settlementPeriod;
+
+	public void setAmountPeriod(AmountPeriod amountPeriod) {
+		this.amountPeriod = amountPeriod;
 	}
+
 
 	public Integer getActive() {
 		return active;
 	}
 
+
 	public void setActive(Integer active) {
 		this.active = active;
 	}
 
-	public Systems getSystem() {
+
+	public Systems getSystems() {
 		return systems;
 	}
 
-	public void setSystem(Systems systems) {
+
+	public void setSystems(Systems systems) {
 		this.systems = systems;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Deal [id=" + id + ", dealNumber=" + dealNumber + ", startDate=" + startDate + ", finishDate="
-				+ finishDate + ", sumOfDeal=" + sumOfDeal + ", settlementPeriod=" + settlementPeriod + ", active="
-				+ active + ", systems=" + systems + "]";
+		return "Deal [id=" + id + ", orderNumber=" + orderNumber + ", fromDate=" + fromDate + ", toDate=" + toDate
+				+ ", amount=" + amount + ", amountPeriod=" + amountPeriod + ", active=" + active + "]";
 	}
-
-
-	
-
 	
 }

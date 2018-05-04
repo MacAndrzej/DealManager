@@ -18,33 +18,41 @@
 <link href="${tableCss}" rel="stylesheet" />
 </head>
 <body>
+	<h3>List of all active orders.</h3>
 	<table id="myTable">
 		<thead>
 			<tr>
 				<th>No.</th>
-				<th>Deal_number</th>
-				<th>From</th>
-				<th>To</th>
-				<th>Sum_of_deal</th>
-				<th>Settlement_period</th>
-				<th>Active</th>
+				<th>Order_number</th>
+				<th>From_date</th>
+				<th>To_date</th>
+				<th>Amount</th>
+				<th>Amount_period</th>
+				<th>Operations</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="listDeals" items="${deals}" varStatus="status">
+				<c:url var="updateLink" value="/deal/showFormForUpdateDeal">
+					<c:param name="dealId" value="${listDeals.id}"></c:param>
+				</c:url>
+				<c:url var="disableLink" value="/deal/disableDeal">
+					<c:param name="dealId" value="${listDeals.id}"></c:param>
+				</c:url>
 				<tr>
 					<td>${status.count}</td>
-					<td>${listDeals.dealNumber}</td>
-					<td>${listDeals.startDate}</td>
-					<td>${listDeals.finishDate}</td>
-					<td>${listDeals.sumOfDeal}</td>
-					<td>${listDeals.settlementPeriod}</td>
-					<td>${listDeals.active}</td>
+					<td>${listDeals.orderNumber}</td>
+					<td>${listDeals.fromDate}</td>
+					<td>${listDeals.toDate}</td>
+					<td>${listDeals.amount}</td>
+					<td>${listDeals.amountPeriod}</td>
+					<td><a href="${updateLink}">Edit</a> | <a
+						href="${disableLink}">Disable</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#myTable').dataTable();

@@ -1,5 +1,5 @@
 package info.deal.entity;
 
-public enum SettlementPeriod {
+public enum AmountPeriod {
 	MONTH, QUARTER, YEAR
 }

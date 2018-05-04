@@ -19,16 +19,16 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />  
    </definition>  
    
-   <!-- List Deals Page -->
-    <definition name="listDeals" extends="template-def">  
-       <put-attribute name="title" value="listDeals" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/listDeals.jsp" />  
+   <!-- List All Orders Page -->
+    <definition name="listAllOrders" extends="template-def">  
+       <put-attribute name="title" value="listAllOrders" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/listAllOrders.jsp" />  
    </definition>  
    
-    <!-- List Active Deals Page -->
-    <definition name="listActiveDeals" extends="template-def">  
-       <put-attribute name="title" value="listActiveDeals" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/listActiveDeals.jsp" />  
+    <!-- List Active Orders Page -->
+    <definition name="listActiveOrders" extends="template-def">  
+       <put-attribute name="title" value="listActiveOrders" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/listActiveOrders.jsp" />  
    </definition>  
    
      <!-- List Systems Page -->

@@ -37,7 +37,7 @@ public class Systems {
 	private String systemOwner;
 
 	@OneToMany(mappedBy = "systems", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH },fetch=FetchType.LAZY)
+			CascadeType.REFRESH },fetch=FetchType.LAZY,orphanRemoval = true)
 	private List<Deal> deals;
 
 	public Systems() {
@@ -47,9 +47,9 @@ public class Systems {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 
 	public String getSystemName() {
 		return systemName;
@@ -96,7 +96,7 @@ public class Systems {
 			deals = new ArrayList<Deal>();
 		}
 		deals.add(tempDeal);
-		tempDeal.setSystem(this);
+		tempDeal.setSystems(this);
 	}
 
 	@Override
