@@ -10,4 +10,8 @@ public interface DealDAO {
 
 	public List<Deal> getActiveDeals();
 
+	public Deal getActiveDeal(long theId);
+
+	public Deal deactiveDeal(long theId);
+
 }

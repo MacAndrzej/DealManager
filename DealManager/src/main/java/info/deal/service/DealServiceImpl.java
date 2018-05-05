@@ -37,4 +37,17 @@ public class DealServiceImpl implements DealService {
 		return deals;
 	}
 
+	@Transactional
+	public Deal getActiveDeal(long theId) {
+		Deal theDeal=dealDAO.getActiveDeal(theId);
+		theDeal.setActive(0);
+		return theDeal;
+	}
+
+	@Transactional
+	public Deal deactiveDeal(long theId) {
+		Deal theDeal=dealDAO.deactiveDeal(theId);
+		return null;
+	}
+
 }

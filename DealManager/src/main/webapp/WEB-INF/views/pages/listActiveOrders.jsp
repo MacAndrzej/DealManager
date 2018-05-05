@@ -33,10 +33,10 @@
 		</thead>
 		<tbody>
 			<c:forEach var="listDeals" items="${deals}" varStatus="status">
-				<c:url var="updateLink" value="/deal/showFormForUpdateDeal">
+				<c:url var="updateLink" value="/order/showFormForUpdateOrder">
 					<c:param name="dealId" value="${listDeals.id}"></c:param>
 				</c:url>
-				<c:url var="disableLink" value="/deal/disableDeal">
+				<c:url var="disableLink" value="/order/disableOrder">
 					<c:param name="dealId" value="${listDeals.id}"></c:param>
 				</c:url>
 				<tr>

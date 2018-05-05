@@ -41,7 +41,6 @@ public class DealDAOImpl implements DealDAO {
 	
 	public List<Deal> getActiveDeals() {
 		/* get the current hibernate session */
-		
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("Ustawiona sesja, przed zapytaniem");
 		/* create a query */
@@ -53,6 +52,26 @@ public class DealDAOImpl implements DealDAO {
 		System.out.println("Po załadowaniu do listy, przed zwrotem");
 		/* return the result */
 		return deals;
+	}
+
+
+	public Deal getActiveDeal(long theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Deal> theQuery = currentSession.createQuery("from Deal where id= :code", Deal.class);
+		theQuery.setParameter("code", theId);
+		List<Deal> deals = theQuery.getResultList();
+		return deals.get(0);
+	}
+
+
+	public Deal deactiveDeal(long theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Deal> theQuery = currentSession.createQuery("from Deal where id= :code", Deal.class);
+		theQuery.setParameter("code", theId);
+		List<Deal> deals = theQuery.getResultList();
+		Deal theDeal=deals.get(0);
+		theDeal.setActive(0);
+		return theDeal;
 	}
 
 }

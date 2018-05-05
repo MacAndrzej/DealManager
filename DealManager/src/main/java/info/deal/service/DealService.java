@@ -10,4 +10,8 @@ public interface DealService {
 
 	public List<Deal> getActiveDeals();
 
+	public Deal getActiveDeal(long theId);
+
+	public Deal deactiveDeal(long theId);
+
 }
