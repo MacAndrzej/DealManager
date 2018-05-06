@@ -37,5 +37,11 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/listSystems.jsp" />  
    </definition>  
    
+     <!-- Form add new Order -->
+    <definition name="dealForm" extends="template-def">  
+       <put-attribute name="title" value="Add order" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/dealForm.jsp" />  
+   </definition>  
+   
   
 </tiles-definitions>

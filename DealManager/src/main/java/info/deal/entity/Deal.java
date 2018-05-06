@@ -2,6 +2,7 @@ package info.deal.entity;
 
 import java.time.LocalDate;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -25,24 +32,31 @@ public class Deal {
 	@Column(name="id")
 	private Long id;
 	
+	@NotNull(message="pole nie może być puste")
 	@Column(name="order_number")
 	private String orderNumber;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message="pole nie może być puste")
 	@Column(name="from_date")
 	private LocalDate fromDate;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message="pole nie może być puste")
 	@Column(name="to_date")
 	private LocalDate toDate;
 	
+	@NotNull(message="pole nie może być puste")
+	@Pattern(regexp = "[0-9]+", message = "to nie jest poprawna wartość")
 	@Column(name="amount")
-	private Integer amount;
+	private String amount;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="amount_period")
 	private AmountPeriod amountPeriod;
 	
 	@Column(name="active")
-	private Integer active;
+	private Integer active=1;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.EAGER)
 	@JoinColumn(name = "system_id")
@@ -92,12 +106,12 @@ public class Deal {
 	}
 
 
-	public Integer getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
 
-	public void setAmount(Integer amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -135,7 +149,10 @@ public class Deal {
 	@Override
 	public String toString() {
 		return "Deal [id=" + id + ", orderNumber=" + orderNumber + ", fromDate=" + fromDate + ", toDate=" + toDate
-				+ ", amount=" + amount + ", amountPeriod=" + amountPeriod + ", active=" + active + "]";
+				+ ", amount=" + amount + ", amountPeriod=" + amountPeriod + ", active=" + active + ", systems="
+				+ systems + "]";
 	}
+
+
 	
 }

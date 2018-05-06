@@ -5,7 +5,7 @@
 	<groupId>info</groupId>
 	<artifactId>deal</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>deal Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -16,6 +16,7 @@
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<javax.servlet.jsp-api.version>2.3.1</javax.servlet.jsp-api.version>
 		<jstl.version>1.2</jstl.version>
+		<javax.validation.version>2.0.1.Final</javax.validation.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 	</properties>
 
@@ -72,6 +73,10 @@
 		</dependency>
 
 
+
+		
+
+
 		<!-- Servlet+JSP+JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -101,7 +106,14 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-	<!-- PostgresSQL -->
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.9.Final</version>
+		</dependency>
+
+		<!-- PostgresSQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

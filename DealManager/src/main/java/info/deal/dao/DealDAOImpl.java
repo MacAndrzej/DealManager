@@ -2,18 +2,14 @@ package info.deal.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import info.deal.config.HibernateConfiguration;
 import info.deal.entity.Deal;
-import info.deal.entity.Systems;
+
 
 @Repository
 public class DealDAOImpl implements DealDAO {
@@ -21,16 +17,14 @@ public class DealDAOImpl implements DealDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	
 	public List<Deal> getDeals() {
-		
-		
+
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-		
+
 		/* create a query */
 		Query<Deal> theQuery = currentSession.createQuery("from Deal", Deal.class);
-		
+
 		/* execute query and get result list */
 		List<Deal> deals = theQuery.getResultList();
 		
@@ -38,7 +32,6 @@ public class DealDAOImpl implements DealDAO {
 		return deals;
 	}
 
-	
 	public List<Deal> getActiveDeals() {
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -54,8 +47,7 @@ public class DealDAOImpl implements DealDAO {
 		return deals;
 	}
 
-
-	public Deal getActiveDeal(long theId) {
+	public Deal findById(long theId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Deal> theQuery = currentSession.createQuery("from Deal where id= :code", Deal.class);
 		theQuery.setParameter("code", theId);
@@ -63,15 +55,11 @@ public class DealDAOImpl implements DealDAO {
 		return deals.get(0);
 	}
 
-
-	public Deal deactiveDeal(long theId) {
+	public void saveDeal(Deal theDeal) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Deal> theQuery = currentSession.createQuery("from Deal where id= :code", Deal.class);
-		theQuery.setParameter("code", theId);
-		List<Deal> deals = theQuery.getResultList();
-		Deal theDeal=deals.get(0);
-		theDeal.setActive(0);
-		return theDeal;
+		System.out.println("DAO: "+theDeal);
+		currentSession.saveOrUpdate(theDeal);
+
 	}
 
 }

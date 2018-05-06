@@ -3,6 +3,10 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,13 +26,13 @@
 	<table id="myTable">
 		<thead>
 			<tr>
-				<th>No.</th>
-				<th>Order_number</th>
-				<th>From_date</th>
-				<th>To_date</th>
-				<th>Amount</th>
-				<th>Amount_period</th>
-				<th>Active</th>
+				<th>Lp.</th>
+				<th>Numer umowy</th>
+				<th>Od</th>
+				<th>Do</th>
+				<th>Wpływy</th>
+				<th>W skali</th>
+				<th>Aktywna</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,8 +43,17 @@
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>
 					<td>${listDeals.amount}</td>
-					<td>${listDeals.amountPeriod}</td>
-					<td>${listDeals.active}</td>
+					<td><c:choose>
+							<c:when test="${listDeals.amountPeriod=='YEAR'}">na rok</c:when>
+							<c:when test="${listDeals.amountPeriod=='MONTH'}">na miesiąc</c:when>
+							<c:when test="${listDeals.amountPeriod=='QUARTER'}">na kwartał</c:when>
+							<c:otherwise>nie określono</c:otherwise>
+						</c:choose></td>
+					<td><c:choose>
+							<c:when test="${listDeals.active==1}">TAK
+					 </c:when>
+							<c:otherwise>NIE</c:otherwise>
+						</c:choose></td>
 				</tr>
 			</c:forEach>
 		</tbody>
