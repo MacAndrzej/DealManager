@@ -15,24 +15,21 @@ import info.deal.service.SystemService;
 @RequestMapping("/system")
 public class SystemController {
 
-	/* inject the system DAO */
 	@Autowired
 	private SystemService systemService;
 
+	/**
+	 * Takes the request,calls service,set model and returns view name to
+	 * DispatcherServlet.
+	 * 
+	 * @param theModel
+	 *            Model to fulfill by list of all deals entry.
+	 * @return View name to DispatcherServlet.
+	 */
 	@RequestMapping("/list")
 	public String listSystems(Model theModel) {
-
 		List<Systems> theSystems = systemService.getSystems();
-		System.out.println("Jesteśmy z powrotem w controllerze");
-		System.out.println("Teraz powinno wyświetlić pobrany wynik przy pomocy toString");
-//		System.out.println(theSystems.toString());
-		System.out.println("Wyświetliło theSystems.toString");
-		
 		theModel.addAttribute("systems", theSystems);
-//		for (Systems systems : theSystems) {
-//			System.out.println(systems.toString());
-//		}
-
 		return "listSystems";
 	}
 

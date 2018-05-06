@@ -22,6 +22,11 @@
 			<table>
 				<tbody>
 					<tr>
+						<td><label>Nazwa systemu</label></td>
+						<td><form:input path="systems.id" /> <form:errors
+								path="systems.id" class="errorInputValidation" /></td>
+					</tr>
+					<tr>
 						<td><label>Numer umowy</label></td>
 						<td><form:input path="orderNumber" /> <form:errors
 								path="orderNumber" class="errorInputValidation" /></td>

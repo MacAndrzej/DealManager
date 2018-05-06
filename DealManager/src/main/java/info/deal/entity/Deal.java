@@ -2,7 +2,7 @@ package info.deal.entity;
 
 import java.time.LocalDate;
 
-import javax.enterprise.inject.Default;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -61,8 +59,11 @@ public class Deal {
 	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.EAGER)
 	@JoinColumn(name = "system_id")
 	private Systems systems;
-	
+	/**
+	 * Empty constructor neccessary to correct ORM
+	 */
 	public Deal() {
+		
 	}
 
 	

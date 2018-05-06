@@ -10,28 +10,33 @@ import org.springframework.stereotype.Repository;
 
 import info.deal.entity.Deal;
 
-
+/**
+ * 
+ * @author Andrzej Repository layer of the application.
+ */
 @Repository
 public class DealDAOImpl implements DealDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
 
+	/**
+	 * Returns a list of all deals entries.
+	 */
 	public List<Deal> getDeals() {
-
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-
 		/* create a query */
 		Query<Deal> theQuery = currentSession.createQuery("from Deal", Deal.class);
-
 		/* execute query and get result list */
 		List<Deal> deals = theQuery.getResultList();
-		
 		/* return the result */
 		return deals;
 	}
 
+	/**
+	 * Returns a list of all active deals entries.
+	 */
 	public List<Deal> getActiveDeals() {
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -47,6 +52,9 @@ public class DealDAOImpl implements DealDAO {
 		return deals;
 	}
 
+	/**
+	 * Finds a deal entry.
+	 */
 	public Deal findById(long theId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Deal> theQuery = currentSession.createQuery("from Deal where id= :code", Deal.class);
@@ -55,9 +63,12 @@ public class DealDAOImpl implements DealDAO {
 		return deals.get(0);
 	}
 
+	/**
+	 * Saves a deal entry.
+	 */
 	public void saveDeal(Deal theDeal) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		System.out.println("DAO: "+theDeal);
+		System.out.println("DAO: " + theDeal);
 		currentSession.saveOrUpdate(theDeal);
 
 	}

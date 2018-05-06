@@ -27,6 +27,7 @@
 		<thead>
 			<tr>
 				<th>Lp.</th>
+			
 				<th>Numer umowy</th>
 				<th>Od</th>
 				<th>Do</th>
@@ -39,6 +40,7 @@
 			<c:forEach var="listDeals" items="${deals}" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
+			
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>

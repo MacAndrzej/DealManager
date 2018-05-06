@@ -12,25 +12,26 @@ import org.springframework.transaction.annotation.Transactional;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
+/**
+ * 
+ * @author Andrzej Repository layer of the application.
+ */
 @Repository
 public class SystemDAOImpl implements SystemDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-
+	/**
+	 * Returns a list of all systems entries.
+	 */
 	public List<Systems> getSystems() {
-
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-		System.out.println("Ustawiona sesja, przed zapytaniem");
 		/* create a query */
 		Query<Systems> theQuery = currentSession.createQuery("from Systems", Systems.class);
-		System.out.println("Po zapytaniu, przed załadowaniem do listy");
 		/* execute query and get result list */
 		List<Systems> systems = theQuery.getResultList();
-		System.out.println("Po załadowaniu do listy, przed zwrotem");
-		System.out.println("Teraz wracamy do controllera");
 		/* return the result */
 		return systems;
 	}
