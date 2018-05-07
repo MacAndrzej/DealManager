@@ -56,6 +56,7 @@ public class Deal {
 	@Column(name="active")
 	private Integer active=1;
 	
+	@NotNull(message="pole nie może być puste")
 	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.EAGER)
 	@JoinColumn(name = "system_id")
 	private Systems systems;

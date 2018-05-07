@@ -29,6 +29,7 @@ request.setCharacterEncoding("UTF-8");
 		<thead>
 			<tr>
 				<th>Lp.</th>
+				<th>Nazwa systemu</th>
 				<th>Numer umowy</th>
 				<th>Od</th>
 				<th>Do</th>
@@ -47,6 +48,7 @@ request.setCharacterEncoding("UTF-8");
 				</c:url>
 				<tr>
 					<td>${status.count}</td>
+					<td>${listDeals.systems.getSystemName()}</td>
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>

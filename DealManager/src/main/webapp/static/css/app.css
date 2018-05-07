@@ -39,6 +39,12 @@ footer {
 	text-decoration: none;
 }
 
+th {background: #555;color: #FFF;} 
+  tr:nth-child(odd) {background: #CCC;}
+  tr:nth-child(even) {background: #EFEFEF;}
+
+
+
 @media all and (min-width: 768px) {
 	.nav {
 		text-align: left;

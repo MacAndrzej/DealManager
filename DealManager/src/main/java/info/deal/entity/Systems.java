@@ -45,6 +45,10 @@ public class Systems {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getSystemName() {
 		return systemName;
 	}

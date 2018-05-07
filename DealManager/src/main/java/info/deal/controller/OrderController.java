@@ -32,9 +32,10 @@ public class OrderController {
 
 	@Autowired
 	private DealService dealService;
-
+	
 	@Autowired
 	private SystemService systemService;
+
 
 	/**
 	 * Takes the request,calls service,set model and returns view name to
@@ -76,6 +77,7 @@ public class OrderController {
 	@GetMapping("/showFormForAddOrder")
 	public String showFormForAddChild(Model theModel) {
 		theModel.addAttribute("order", new Deal());
+		theModel.addAttribute("systems", systemService.getSystems());
 		return "dealForm";
 	}
 

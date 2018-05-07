@@ -10,9 +10,19 @@
   	<description></description>
   	<servlet-class>info.deal.TestConnectionDb.TestDbServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>MenuController</servlet-name>
+  	<display-name>MenuController</display-name>
+  	<description></description>
+  	<servlet-class>info.deal.controller.MenuController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>TestDbServlet</servlet-name>
   	<url-pattern>/TestDbServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MenuController</servlet-name>
+  	<url-pattern>/MenuController</url-pattern>
   </servlet-mapping>
 
 

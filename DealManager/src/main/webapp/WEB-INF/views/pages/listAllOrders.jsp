@@ -10,6 +10,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<link type="text/css" rel="stylesheet" href="../css/app.css">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -23,12 +25,13 @@
 </head>
 <h3>List of all orders.</h3>
 <body>
-	<table id="myTable">
+	<table id="myTable" class="table">
 		<thead>
 			<tr>
 				<th>Lp.</th>
-			
+
 				<th>Numer umowy</th>
+				<th>Nazwa systemu</th>
 				<th>Od</th>
 				<th>Do</th>
 				<th>Wpływy</th>
@@ -40,7 +43,7 @@
 			<c:forEach var="listDeals" items="${deals}" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-			
+					<td>${listDeals.systems.getSystemName()}</td>
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>

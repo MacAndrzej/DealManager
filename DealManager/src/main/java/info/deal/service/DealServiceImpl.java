@@ -13,12 +13,12 @@ import info.deal.entity.Deal;
 
 
 @Service
+@Transactional
 public class DealServiceImpl implements DealService {
 	
 	@Autowired
 	private DealDAO dealDAO;
 
-	@Transactional
 	public List<Deal> getDeals() {
 		List<Deal> deals=new ArrayList<Deal>();
 		for (Deal d : dealDAO.getDeals()) {
@@ -28,7 +28,6 @@ public class DealServiceImpl implements DealService {
 		return deals;
 	}
 
-	@Transactional
 	public List<Deal> getActiveDeals() {
 		List<Deal> deals=new ArrayList<Deal>();
 		for (Deal d : dealDAO.getActiveDeals()) {
@@ -37,19 +36,16 @@ public class DealServiceImpl implements DealService {
 		return deals;
 	}
 
-	@Transactional
 	public Deal findById(long theId) {
 		Deal theDeal=dealDAO.findById(theId);
 		return theDeal;
 	}
 
-	@Transactional
 	public Deal saveDeal(Deal theDeal) {
 		dealDAO.saveDeal(theDeal);
 		return theDeal;
 	}
 
-	@Transactional
 	public Deal disableDeal(long theId) {
 		Deal theDeal=dealDAO.findById(theId);
 		theDeal.setActive(0);

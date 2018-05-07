@@ -12,12 +12,13 @@ import info.deal.dao.SystemDAO;
 import info.deal.entity.Systems;
 
 @Service
+@Transactional
 public class SystemServiceImpl implements SystemService {
 	
 	@Autowired
 	private SystemDAO systemDAO;
 
-	@Transactional
+	
 	public List<Systems> getSystems() {
 		List<Systems> systems=new ArrayList<Systems>();
 		for (Systems s : systemDAO.getSystems()) {
