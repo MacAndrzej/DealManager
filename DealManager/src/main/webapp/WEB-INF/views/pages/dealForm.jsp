@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>|
+<%@ page isELIgnored="false"%>
 <%
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
@@ -26,11 +26,12 @@
 
 					<tr>
 						<td><label>Nazwa systemu:</label></td>
-						<td><select>
-								<c:forEach var="system" items="${systems}">
+						<td><form:select path="systems.id">
+								<form:option value="27">Wybierz system</form:option>
+								<c:forEach var="system" items="${allSystems}">
 									<option value="${system.id}">${system.systemName}</option>
 								</c:forEach>
-						</select></td>
+							</form:select></td>
 					</tr>
 					<tr>
 						<td><label>Numer umowy</label></td>

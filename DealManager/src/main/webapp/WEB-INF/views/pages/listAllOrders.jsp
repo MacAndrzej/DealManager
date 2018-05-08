@@ -14,7 +14,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>List all orders</title>
 <spring:url value="/static/javaScript/jquery-1.12.4.js" var="jqueryJs" />
 <spring:url value="/static/css/jquery.dataTables.min.css" var="tableCss" />
 <spring:url value="/static/javaScript/jquery.dataTables.min.js"
@@ -29,9 +29,8 @@
 		<thead>
 			<tr>
 				<th>Lp.</th>
-
-				<th>Numer umowy</th>
 				<th>Nazwa systemu</th>
+				<th>Numer umowy</th>
 				<th>Od</th>
 				<th>Do</th>
 				<th>Wpływy</th>
@@ -47,7 +46,7 @@
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>
-					<td>${listDeals.amount}</td>
+					<td>${listDeals.amount} zł</td>
 					<td><c:choose>
 							<c:when test="${listDeals.amountPeriod=='YEAR'}">na rok</c:when>
 							<c:when test="${listDeals.amountPeriod=='MONTH'}">na miesiąc</c:when>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,19 @@ public class SystemServiceImpl implements SystemService {
 		}
 		
 		return systems;
+	}
+
+
+	public Systems findById(long theId) {
+		Systems theSystem=systemDAO.findById(theId);
+		return theSystem;
+	}
+
+
+	public Systems saveSystem(@Valid Systems theSystems) {
+		systemDAO.saveSystem(theSystems);
+		return theSystems;
+		
 	}
 
 }

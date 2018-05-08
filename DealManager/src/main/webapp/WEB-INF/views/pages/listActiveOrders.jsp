@@ -3,15 +3,16 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%response.setCharacterEncoding("UTF-8");
-request.setCharacterEncoding("UTF-8");
+<%
+	response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>All Active orders</title>
 <spring:url value="/static/javaScript/jquery-1.12.4.js" var="jqueryJs" />
 <spring:url value="/static/css/jquery.dataTables.min.css" var="tableCss" />
 <spring:url value="/static/javaScript/jquery.dataTables.min.js"
@@ -35,7 +36,7 @@ request.setCharacterEncoding("UTF-8");
 				<th>Do</th>
 				<th>Wpływy</th>
 				<th>W skali</th>
-				<th>Operations</th>
+				<th>Operacje</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,15 +53,15 @@ request.setCharacterEncoding("UTF-8");
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>
-					<td>${listDeals.amount}</td>
+					<td>${listDeals.amount} zł</td>
 					<td><c:choose>
 							<c:when test="${listDeals.amountPeriod=='YEAR'}">na rok</c:when>
 							<c:when test="${listDeals.amountPeriod=='MONTH'}">na miesiąc</c:when>
 							<c:when test="${listDeals.amountPeriod=='QUARTER'}">na kwartał</c:when>
 							<c:otherwise>nie określono</c:otherwise>
 						</c:choose></td>
-					<td><a href="${updateLink}">Edit</a> | <a
-						href="${disableLink}">Disable</a></td>
+					<td><a href="${updateLink}">Edytuj</a> | <a
+						href="${disableLink}">Zakończ</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

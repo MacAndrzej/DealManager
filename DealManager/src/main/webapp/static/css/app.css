@@ -16,6 +16,11 @@
 	text-align: left;
 }
 
+body {
+	font-family: 'Helvetica', Sans-serif;
+	font-size: large;
+}
+
 header {
 	background: black;
 	color: white;
@@ -39,11 +44,25 @@ footer {
 	text-decoration: none;
 }
 
-th {background: #555;color: #FFF;} 
-  tr:nth-child(odd) {background: #CCC;}
-  tr:nth-child(even) {background: #EFEFEF;}
+th {
+	background: #555;
+	color: #FFF;
+}
 
+table.dataTable tr.odd { background-color: #EEEEEE; }
+table.dataTable tr.even { background-color: white; }
 
+.add-button {
+	border: 1px solid #666;
+	border-radius: 5px;
+	padding: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	width: 120px;
+	padding: 5px 10px;
+	margin-top: 15px;
+	background: #cccccc;
+}
 
 @media all and (min-width: 768px) {
 	.nav {

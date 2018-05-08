@@ -2,6 +2,8 @@ package info.deal.dao;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import info.deal.entity.Systems;
 
 /**
@@ -16,5 +18,9 @@ public interface SystemDAO {
 	 * @return List found deals.
 	 */
 	public List<Systems> getSystems();
+
+	public Systems findById(long theId);
+
+	public void saveSystem(@Valid Systems theSystems);
 
 }

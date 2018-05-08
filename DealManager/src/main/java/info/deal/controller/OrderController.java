@@ -32,10 +32,9 @@ public class OrderController {
 
 	@Autowired
 	private DealService dealService;
-	
+
 	@Autowired
 	private SystemService systemService;
-
 
 	/**
 	 * Takes the request,calls service,set model and returns view name to
@@ -77,7 +76,7 @@ public class OrderController {
 	@GetMapping("/showFormForAddOrder")
 	public String showFormForAddChild(Model theModel) {
 		theModel.addAttribute("order", new Deal());
-		theModel.addAttribute("systems", systemService.getSystems());
+		theModel.addAttribute("allSystems", systemService.getSystems());
 		return "dealForm";
 	}
 
@@ -95,7 +94,7 @@ public class OrderController {
 	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel) {
 		Deal theDeal = dealService.findById(theId);
 		theModel.addAttribute("order", theDeal);
-		System.out.println();
+		theModel.addAttribute("allSystems", systemService.getSystems());
 		return "dealForm";
 	}
 
@@ -127,6 +126,7 @@ public class OrderController {
 	@PostMapping("/saveOrder")
 	public String addDeal(@Valid @ModelAttribute("order") Deal theDeal, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
+			System.out.println(theDeal);
 			return "dealForm";
 		}
 		dealService.saveDeal(theDeal);

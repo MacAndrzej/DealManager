@@ -70,7 +70,6 @@ public class DealDAOImpl implements DealDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("DAO: " + theDeal);
 		currentSession.saveOrUpdate(theDeal);
-
 	}
 
 }

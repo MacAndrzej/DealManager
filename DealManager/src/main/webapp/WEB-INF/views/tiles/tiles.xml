@@ -43,5 +43,11 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/dealForm.jsp" />  
    </definition>  
    
+     <!-- Form update System -->
+    <definition name="systemForm" extends="template-def">  
+       <put-attribute name="title" value="Update system" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/systemForm.jsp" />  
+   </definition>  
+   
   
 </tiles-definitions>

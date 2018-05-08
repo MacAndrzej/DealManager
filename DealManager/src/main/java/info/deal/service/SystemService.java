@@ -2,6 +2,8 @@ package info.deal.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import info.deal.entity.Systems;
 
 /**
@@ -16,5 +18,9 @@ public interface SystemService {
 	 * @return
 	 */
 	List<Systems> getSystems();
+
+	Systems findById(long theId);
+
+	Systems saveSystem(@Valid Systems theSystems);
 
 }
