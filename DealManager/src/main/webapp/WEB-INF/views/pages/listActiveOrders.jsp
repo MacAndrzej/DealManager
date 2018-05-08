@@ -23,20 +23,20 @@
 </head>
 <body>
 	<h3>List of all active orders.</h3>
-	<input type="button" value="Dodaj umowę"
+	<input type="button" value="Add order"
 		onclick="window.location.href='showFormForAddOrder'; return false;"
 		class="add-button" />
 	<table id="myTable">
 		<thead>
 			<tr>
-				<th>Lp.</th>
-				<th>Nazwa systemu</th>
-				<th>Numer umowy</th>
-				<th>Od</th>
-				<th>Do</th>
-				<th>Wpływy</th>
-				<th>W skali</th>
-				<th>Operacje</th>
+				<th>No.</th>
+				<th>System name</th>
+				<th>Order number</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Amount</th>
+				<th>Amount per period</th>
+				<th>Operations</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,15 +53,15 @@
 					<td>${listDeals.orderNumber}</td>
 					<td>${listDeals.fromDate}</td>
 					<td>${listDeals.toDate}</td>
-					<td>${listDeals.amount} zł</td>
+					<td>${listDeals.amount}zł</td>
 					<td><c:choose>
 							<c:when test="${listDeals.amountPeriod=='YEAR'}">na rok</c:when>
 							<c:when test="${listDeals.amountPeriod=='MONTH'}">na miesiąc</c:when>
 							<c:when test="${listDeals.amountPeriod=='QUARTER'}">na kwartał</c:when>
 							<c:otherwise>nie określono</c:otherwise>
 						</c:choose></td>
-					<td><a href="${updateLink}">Edytuj</a> | <a
-						href="${disableLink}">Zakończ</a></td>
+					<td><a href="${updateLink}">Edit</a> | <a
+						href="${disableLink}">Deactive</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

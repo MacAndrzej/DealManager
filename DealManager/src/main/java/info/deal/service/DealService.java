@@ -29,7 +29,7 @@ public interface DealService {
 	 * 
 	 * @param theId
 	 *            The theId of the wanted deals entry.
-	 * @return The found user.
+	 * @return The found deal.
 	 */
 	public Deal findById(long theId);
 

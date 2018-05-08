@@ -3,27 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>TestDbServlet</servlet-name>
-  	<display-name>TestDbServlet</display-name>
-  	<description></description>
-  	<servlet-class>info.deal.TestConnectionDb.TestDbServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>MenuController</servlet-name>
-  	<display-name>MenuController</display-name>
-  	<description></description>
-  	<servlet-class>info.deal.controller.MenuController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>TestDbServlet</servlet-name>
-  	<url-pattern>/TestDbServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>MenuController</servlet-name>
-  	<url-pattern>/MenuController</url-pattern>
-  </servlet-mapping>
-
-
+	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>TestDbServlet</servlet-name>
+		<display-name>TestDbServlet</display-name>
+		<description></description>
+		<servlet-class>info.deal.TestConnectionDb.TestDbServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestDbServlet</servlet-name>
+		<url-pattern>/TestDbServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

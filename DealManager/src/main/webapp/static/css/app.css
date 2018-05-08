@@ -64,6 +64,16 @@ table.dataTable tr.even { background-color: white; }
 	background: #cccccc;
 }
 
+h3{
+	text-align: center;
+	text-decoration: underline;
+}
+
+.errorInputValidation {
+	color: red;
+	font-style: italic;
+}
+
 @media all and (min-width: 768px) {
 	.nav {
 		text-align: left;

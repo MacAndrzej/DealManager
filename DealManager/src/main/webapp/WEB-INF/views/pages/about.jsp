@@ -8,10 +8,10 @@
 </head>
 <body>
 <h2>Welcome to Deal Manager</h2>
-<p>My name is Andrew Maciejuk.</p>
-<p>I made this project between 24.th April and 8.th May.</p>
+<p>My name is Andrzej Maciejuk.</p>
+<p>I made this project between 24.th of April and 8.th of May.</p>
 
 <p>Best Regards,</p>
-Andrew.
+Andrzej.
 </body>
 </html>

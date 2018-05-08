@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import info.deal.entity.Systems;
 import info.deal.service.SystemService;
-
+/**
+ * 
+ * @author Andrzej
+ *
+ */
 @Controller
 @RequestMapping("/system")
 public class SystemController {
@@ -46,6 +50,7 @@ public class SystemController {
 	 * @param theModel
 	 *            Model to fulfill by updated system.
 	 * @return View name to DispatcherServlet.
+	 * 
 	 */
 	@GetMapping("/showFormForUpdateSystem")
 	public String showFormForUpdateSystem(@RequestParam("systemId") long theId, Model theModel) {
@@ -61,6 +66,7 @@ public class SystemController {
 	 * @param theBindingResult
 	 *            The information of the correctness data.
 	 * @return Redirect to view.
+	 * 
 	 */
 	@PostMapping("/saveSystem")
 	public String addDeal(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {

@@ -19,8 +19,20 @@ public interface SystemService {
 	 */
 	List<Systems> getSystems();
 
+	/**
+	 * 
+	 * @param theId
+	 *            The theId of the wanted system entry.
+	 * @return The found system.
+	 */
 	Systems findById(long theId);
 
+	/**
+	 * 
+	 * @param theSystems
+	 *            The information of the saved system entry.
+	 * @return The saved system entry.
+	 */
 	Systems saveSystem(@Valid Systems theSystems);
 
 }

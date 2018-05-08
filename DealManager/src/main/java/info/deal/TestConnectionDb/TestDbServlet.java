@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class TestDbServlet to check connection to database
+ * 
+ * @author Andrzej
+ * 
+ *Servlet implementation class TestDbServlet to check connection to database
+ *
  */
 public class TestDbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

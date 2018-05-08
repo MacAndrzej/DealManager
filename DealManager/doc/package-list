@@ -1,1 +1,5 @@
+info.deal.TestConnectionDb
+info.deal.config
+info.deal.controller
 info.deal.dao
+info.deal.entity

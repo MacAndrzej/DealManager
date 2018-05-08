@@ -6,11 +6,7 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 
-
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import info.deal.entity.Deal;
-import info.deal.entity.Systems;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,14 +17,17 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-
-
+/**
+ * 
+ * @author Andrzej
+ *
+ */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"info.deal"})
-@PropertySource(value= {"classpath:application.properties"})
+@ComponentScan({ "info.deal" })
+@PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
-	
+
 	@Autowired
 	private Environment environment;
 
@@ -37,7 +36,7 @@ public class HibernateConfiguration {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan(new String[] { "info.deal.entity" });
-		
+
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

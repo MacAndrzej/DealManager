@@ -9,13 +9,18 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
-
+/**
+ * 
+ * @author Andrzej
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "info.deal")
 public class ApplicationConfiguration implements WebMvcConfigurer {
 	/**
-	 * Configure TilesConfigurer.
+	 * 
+	 * @return Setup of TilesConfigurer
 	 */
 	@Bean
 	public TilesConfigurer tilesConfigurer() {

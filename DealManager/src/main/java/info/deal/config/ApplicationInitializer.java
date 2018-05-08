@@ -2,7 +2,11 @@ package info.deal.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
+/**
+ * 
+ * @author Andrzej
+ *
+ */
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	/**
 	 * Set configuration class.

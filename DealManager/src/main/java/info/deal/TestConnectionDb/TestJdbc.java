@@ -3,8 +3,13 @@ package info.deal.TestConnectionDb;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/*This class tests connection to the Database.*/
-
+/**
+ * 
+ * @author Andrzej
+ * 
+ * This class tests JDBC connection to the Database.
+ *
+ */
 public class TestJdbc {
 
 	public static void main(String[] args) {

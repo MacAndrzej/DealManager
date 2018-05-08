@@ -22,16 +22,16 @@
 <link href="${tableCss}" rel="stylesheet" />
 </head>
 <body>
-<h2>Lista systemów.</h2>
+<h3>List of systems.</h3>
 	<table id="myTable">
 		<thead>
 			<tr>
-				<th>Lp.</th>
-				<th>Nazwa systemu</th>
-				<th>Opis systemu</th>
-				<th>Opis technologii</th>
-				<th>Właściciel systemu</th>
-				<th>Operacje</th>
+				<th>No.</th>
+				<th>System name</th>
+				<th>Description of system</th>
+				<th>Description of technology</th>
+				<th>System owner</th>
+				<th>Operations</th>
 			</tr>
 		</thead>
 		<tbody>

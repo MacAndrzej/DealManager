@@ -20,7 +20,11 @@ import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+/**
+ * 
+ * @author Andrzej
+ *
+ */
 @Entity
 @Table(name="deal")
 public class Deal {

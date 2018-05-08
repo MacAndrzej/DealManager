@@ -118,6 +118,7 @@ public class OrderController {
 	 * @param theBindingResult
 	 *            The information of the correctness data.
 	 * @return Redirect to view.
+	 * 
 	 */
 	@PostMapping("/saveOrder")
 	public String addDeal(@Valid @ModelAttribute("order") Deal theDeal, BindingResult theBindingResult) {
