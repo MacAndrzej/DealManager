@@ -123,7 +123,6 @@ public class OrderController {
 	@PostMapping("/saveOrder")
 	public String addDeal(@Valid @ModelAttribute("order") Deal theDeal, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
-			System.out.println(theDeal);
 			return "dealForm";
 		}
 		dealService.saveDeal(theDeal);

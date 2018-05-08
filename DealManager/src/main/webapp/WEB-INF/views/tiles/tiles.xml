@@ -1,53 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
- 
-<tiles-definitions>  
-  
-   <!-- Template Definition -->
-   <definition name="template-def"
-       template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/tiles/templates/defaultHeader.jsp" />  
-       <put-attribute name="menu" value="/WEB-INF/views/tiles/templates/defaultMenu.jsp" />  
-       <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/defaultFooter.jsp" />  
-   </definition>  
-  
-   <!-- About Page -->
-   <definition name="about" extends="template-def">  
-       <put-attribute name="title" value="Welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/about.jsp" />  
-   </definition>  
-   
-   <!-- List All Orders Page -->
-    <definition name="listAllOrders" extends="template-def">  
-       <put-attribute name="title" value="listAllOrders" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/listAllOrders.jsp" />  
-   </definition>  
-   
-    <!-- List Active Orders Page -->
-    <definition name="listActiveOrders" extends="template-def">  
-       <put-attribute name="title" value="listActiveOrders" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/listActiveOrders.jsp" />  
-   </definition>  
-   
-     <!-- List Systems Page -->
-    <definition name="listSystems" extends="template-def">  
-       <put-attribute name="title" value="listSystems" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/listSystems.jsp" />  
-   </definition>  
-   
-     <!-- Form add new Order -->
-    <definition name="dealForm" extends="template-def">  
-       <put-attribute name="title" value="Add order" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/dealForm.jsp" />  
-   </definition>  
-   
-     <!-- Form update System -->
-    <definition name="systemForm" extends="template-def">  
-       <put-attribute name="title" value="Update system" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/systemForm.jsp" />  
-   </definition>  
-   
-  
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Template Definition -->
+	<definition name="template-def"
+		template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/templates/defaultHeader.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/tiles/templates/defaultMenu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/templates/defaultFooter.jsp" />
+	</definition>
+
+	<!-- About Page -->
+	<definition name="about" extends="template-def">
+		<put-attribute name="title" value="About" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/about.jsp" />
+	</definition>
+
+	<!-- List All Orders Page -->
+	<definition name="listAllOrders" extends="template-def">
+		<put-attribute name="title" value="listAllOrders" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/listAllOrders.jsp" />
+	</definition>
+
+	<!-- List Active Orders Page -->
+	<definition name="listActiveOrders" extends="template-def">
+		<put-attribute name="title" value="listActiveOrders" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/listActiveOrders.jsp" />
+	</definition>
+
+	<!-- List Systems Page -->
+	<definition name="listSystems" extends="template-def">
+		<put-attribute name="title" value="listSystems" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/listSystems.jsp" />
+	</definition>
+
+	<!-- Form add new Order -->
+	<definition name="dealForm" extends="template-def">
+		<put-attribute name="title" value="Add order" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/dealForm.jsp" />
+	</definition>
+
+	<!-- Form update System -->
+	<definition name="systemForm" extends="template-def">
+		<put-attribute name="title" value="Update system" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/systemForm.jsp" />
+	</definition>
+
+
 </tiles-definitions>

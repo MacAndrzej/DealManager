@@ -23,11 +23,10 @@
 
 			<table>
 				<tbody>
-
 					<tr>
 						<td><label>Nazwa systemu:</label></td>
 						<td><form:select path="systems.id">
-								<form:option value="27">Wybierz system</form:option>
+								<form:option value="1">Wybierz system</form:option>
 								<c:forEach var="system" items="${allSystems}">
 									<option value="${system.id}">${system.systemName}</option>
 								</c:forEach>
@@ -61,7 +60,6 @@
 								<form:option value="QUARTER" label="kwartalnie"></form:option>
 							</form:select></td>
 					</tr>
-
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Zapisz" class="save" /></td>

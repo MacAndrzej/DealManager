@@ -22,7 +22,7 @@
 <link href="${tableCss}" rel="stylesheet" />
 </head>
 <body>
-<h3>List of systems.</h3>
+	<h3>List of systems.</h3>
 	<table id="myTable">
 		<thead>
 			<tr>
@@ -36,7 +36,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="listSystems" items="${systems}" varStatus="status">
-			<c:url var="updateLink" value="/system/showFormForUpdateSystem">
+				<c:url var="updateLink" value="/system/showFormForUpdateSystem">
 					<c:param name="systemId" value="${listSystems.id}"></c:param>
 				</c:url>
 				<tr>
@@ -45,7 +45,7 @@
 					<td>${listSystems.descriptionOfSystem}</td>
 					<td>${listSystems.descriptionOfTechnology}</td>
 					<td>${listSystems.systemOwner}</td>
-					<td><a href="${updateLink}">Edytuj</a></td>
+					<td><a href="${updateLink}">Edit</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
