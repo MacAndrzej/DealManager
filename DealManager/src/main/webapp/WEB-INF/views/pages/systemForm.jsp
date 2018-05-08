@@ -17,14 +17,12 @@
 </head>
 <body>
 	<div id="container">
-		<h3>Wypełnij dane umowy:</h3>
+		<h2>Wypełnij dane umowy:</h2>
 		<form:form action="saveSystem" modelAttribute="system" method="POST">
 			<form:hidden path="id" />
 
 			<table>
 				<tbody>
-
-				
 					<tr>
 						<td><label>Nazwa systemu:</label></td>
 						<td><form:input path="systemName" /> <form:errors path="systemName"
@@ -45,8 +43,6 @@
 						<td><form:input path="systemOwner" /> <form:errors path="systemOwner"
 								class="errorInputValidation" /></td>
 					</tr>
-					
-
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Zapisz" class="save" /></td>

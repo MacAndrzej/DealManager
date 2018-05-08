@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import info.deal.dao.SystemDAO;
-import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 import info.deal.service.SystemService;
 
@@ -41,13 +39,29 @@ public class SystemController {
 		return "listSystems";
 	}
 
+	/**
+	 * 
+	 * @param theId
+	 *            The theId of the updated system entry.
+	 * @param theModel
+	 *            Model to fulfill by updated system.
+	 * @return View name to DispatcherServlet.
+	 */
 	@GetMapping("/showFormForUpdateSystem")
 	public String showFormForUpdateSystem(@RequestParam("systemId") long theId, Model theModel) {
 		Systems theSystem = systemService.findById(theId);
 		theModel.addAttribute("system", theSystem);
 		return "systemForm";
 	}
-	
+
+	/**
+	 * 
+	 * @param theSystems
+	 *            The information of the saved system entry.
+	 * @param theBindingResult
+	 *            The information of the correctness data.
+	 * @return Redirect to view.
+	 */
 	@PostMapping("/saveSystem")
 	public String addDeal(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {

@@ -22,7 +22,7 @@
 <link href="${tableCss}" rel="stylesheet" />
 </head>
 <body>
-<h2>List of all Systems.</h2>
+<h2>Lista systemów.</h2>
 	<table id="myTable">
 		<thead>
 			<tr>

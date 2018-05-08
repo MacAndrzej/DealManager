@@ -27,7 +27,7 @@ public interface DealDAO {
 	 * 
 	 * @param theId
 	 *            The theId of the wanted deals entry.
-	 * @return The found user.
+	 * @return The found deal.
 	 */
 	public Deal findById(long theId);
 
@@ -36,7 +36,7 @@ public interface DealDAO {
 	 * 
 	 * @param theDeal
 	 *            The information of the saved deal entry.
-	 * @return The saved deal entry.
+	 * 
 	 */
 	public void saveDeal(Deal theDeal);
 

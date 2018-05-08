@@ -7,9 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
 /**
@@ -36,16 +34,25 @@ public class SystemDAOImpl implements SystemDAO {
 		return systems;
 	}
 
+	/**
+	 * Finds a deal entry.
+	 */
 	public Systems findById(long theId) {
+		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
+		/* create a query */
 		Query<Systems> theQuery = currentSession.createQuery("from Systems where id= :code", Systems.class);
 		theQuery.setParameter("code", theId);
+		/* execute query and get result list */
 		List<Systems> system = theQuery.getResultList();
 		return system.get(0);
 	}
-	
 
+	/**
+	 * Saves a deal entry.
+	 */
 	public void saveSystem(Systems theSystems) {
+		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("DAO: " + theSystems);
 		currentSession.saveOrUpdate(theSystems);

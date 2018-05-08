@@ -19,8 +19,21 @@ public interface SystemDAO {
 	 */
 	public List<Systems> getSystems();
 
+	/**
+	 * 
+	 * @param theId
+	 *            The theId of the wanted system entry.
+	 * @return The found deal.
+	 */
 	public Systems findById(long theId);
 
+	/**
+	 * 
+	 * Saves a system entry.
+	 * 
+	 * @param theSystems
+	 *            The information of the saved system entry.
+	 */
 	public void saveSystem(@Valid Systems theSystems);
 
 }

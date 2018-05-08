@@ -1,8 +1,6 @@
 package info.deal.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import info.deal.entity.Deal;
-import info.deal.entity.Systems;
 import info.deal.service.DealService;
 import info.deal.service.SystemService;
 
@@ -115,7 +112,6 @@ public class OrderController {
 	}
 
 	/**
-	 * Takes the request, take model, check
 	 * 
 	 * @param theDeal
 	 *            The information of the saved deal entry.
