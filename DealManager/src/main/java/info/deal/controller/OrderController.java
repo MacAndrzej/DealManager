@@ -129,4 +129,13 @@ public class OrderController {
 		return "redirect:/order/listActive";
 	}
 
+	/**
+	 * 
+	 * @return Redirect to view.
+	 */
+	@GetMapping("/showImportOrdersForm")
+	public String importCsvTxtOrder() {
+		return "importOrders";
+	}
+
 }
