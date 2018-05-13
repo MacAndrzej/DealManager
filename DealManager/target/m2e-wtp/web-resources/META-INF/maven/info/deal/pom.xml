@@ -76,10 +76,6 @@
 		</dependency>
 
 
-
-
-
-
 		<!-- Servlet+JSP+JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -121,6 +117,13 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1206-jdbc42</version>
+		</dependency>
+
+		<!-- CSV Mapper -->
+		<dependency>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 
 	</dependencies>

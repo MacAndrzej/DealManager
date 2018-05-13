@@ -1,5 +1,7 @@
 package info.deal.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 import info.deal.service.DealService;
 import info.deal.service.SystemService;
@@ -130,11 +133,16 @@ public class OrderController {
 	}
 
 	/**
+	 * Import deals from a file
 	 * 
-	 * @return Redirect to view.
+	 * @return Redirect to view which displays stats of import.
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	@GetMapping("/showImportOrdersForm")
-	public String importCsvTxtOrder() {
+	public String importCsvTxtOrder(Model theModel) throws FileNotFoundException, IOException {
+		Integer importResult = dealService.importCsv().size();
+		theModel.addAttribute("results", importResult);
 		return "importOrders";
 	}
 

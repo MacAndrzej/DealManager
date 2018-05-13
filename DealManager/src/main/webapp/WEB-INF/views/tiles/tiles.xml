@@ -59,18 +59,10 @@
 	</definition>
 	
 	<!-- Page import csv/txt -->
-	<definition name="importOrderCsvTxt" extends="template-def">
+	<definition name="importOrders" extends="template-def">
 		<put-attribute name="title" value="Import Order" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/pages/showImportOrdersForm.jsp" />
+			value="/WEB-INF/views/pages/importOrders.jsp" />
 	</definition>
-	
-	<!-- Page export csv/txt -->
-	<definition name="exportOrderCsvTxt" extends="template-def">
-		<put-attribute name="title" value="Export Order" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/pages/showExportOrdersForm.jsp" />
-	</definition>
-
 
 </tiles-definitions>

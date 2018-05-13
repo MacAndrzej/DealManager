@@ -53,9 +53,9 @@ public class Deal {
 	@Column(name="amount")
 	private String amount;
 	
-	@Enumerated(EnumType.STRING)
+	
 	@Column(name="amount_period")
-	private AmountPeriod amountPeriod;
+	private String amountPeriod;
 	
 	@Column(name="active")
 	private Integer active=1;
@@ -122,12 +122,12 @@ public class Deal {
 	}
 
 
-	public AmountPeriod getAmountPeriod() {
+	public String getAmountPeriod() {
 		return amountPeriod;
 	}
 
 
-	public void setAmountPeriod(AmountPeriod amountPeriod) {
+	public void setAmountPeriod(String amountPeriod) {
 		this.amountPeriod = amountPeriod;
 	}
 

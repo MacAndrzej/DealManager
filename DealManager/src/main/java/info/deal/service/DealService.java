@@ -1,7 +1,10 @@
 package info.deal.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
+import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 
 /**
@@ -50,5 +53,13 @@ public interface DealService {
 	 * @return The saved deal entry.
 	 */
 	public Deal saveDeal(Deal theDeal);
+
+	/**
+	 * Importes deals from a file
+	 * @throws FileNotFoundException 
+	 * @throws IOException 
+	 * 
+	 */
+	public List<DealDto> importCsv() throws FileNotFoundException, IOException;
 
 }
