@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 import info.deal.service.DealService;
 import info.deal.service.SystemService;

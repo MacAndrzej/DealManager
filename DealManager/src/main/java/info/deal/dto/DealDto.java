@@ -1,6 +1,5 @@
 package info.deal.dto;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -10,25 +9,19 @@ import java.util.Date;
  */
 public class DealDto {
 	private String orderNumber;
-	private Date fromDateTemp;
-	private LocalDate fromDate;
-	private Date toDateTemp;
-	private LocalDate toDate;
+	private Date fromDate;
+	private Date toDate;
 	private String amount;
 	private String amountPeriod;
 	private Integer active;
 	private Long systems;
 
-	
-
-	
-
-	public DealDto(String orderNumber, Date fromDateTemp, LocalDate fromDate, Date toDateTemp, LocalDate toDate,
-			String amount, String amountPeriod, Integer active, Long systems) {
+	public DealDto(String orderNumber, Date fromDate, Date toDate, String amount, String amountPeriod, Integer active,
+			Long systems) {
 		this.orderNumber = orderNumber;
-		this.fromDateTemp = fromDateTemp;
+
 		this.fromDate = fromDate;
-		this.toDateTemp = toDateTemp;
+
 		this.toDate = toDate;
 		this.amount = amount;
 		this.amountPeriod = amountPeriod;
@@ -45,22 +38,6 @@ public class DealDto {
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
-	}
-
-	public Date getFromDateTemp() {
-		return fromDateTemp;
-	}
-
-	public void setFromDateTemp(Date fromDateTemp) {
-		this.fromDateTemp = fromDateTemp;
-	}
-
-	public Date getToDateTemp() {
-		return toDateTemp;
-	}
-
-	public void setToDateTemp(Date toDateTemp) {
-		this.toDateTemp = toDateTemp;
 	}
 
 	public String getAmount() {
@@ -86,24 +63,23 @@ public class DealDto {
 	public void setActive(Integer active) {
 		this.active = active;
 	}
-	
-	public LocalDate getFromDate() {
+
+	public Date getFromDate() {
 		return fromDate;
 	}
 
-	public void setFromDate(LocalDate fromDate) {
+	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
 
-	public LocalDate getToDate() {
+	public Date getToDate() {
 		return toDate;
 	}
 
-	public void setToDate(LocalDate toDate) {
+	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
 
-	
 	public Long getSystems() {
 		return systems;
 	}
@@ -114,11 +90,9 @@ public class DealDto {
 
 	@Override
 	public String toString() {
-		return "DealDto [orderNumber=" + orderNumber + ", fromDateTemp=" + fromDateTemp + ", fromDate=" + fromDate
-				+ ", toDateTemp=" + toDateTemp + ", toDate=" + toDate + ", amount=" + amount + ", amountPeriod="
-				+ amountPeriod + ", active=" + active + ", systems=" + systems + "]";
+		return "DealDto [orderNumber=" + orderNumber + ", fromDateTemp=" + ", fromDate=" + fromDate + ", toDateTemp="
+				+ ", toDate=" + toDate + ", amount=" + amount + ", amountPeriod=" + amountPeriod + ", active=" + active
+				+ ", systems=" + systems + "]";
 	}
-
-	
 
 }

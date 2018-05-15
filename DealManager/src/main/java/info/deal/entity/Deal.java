@@ -1,13 +1,10 @@
 package info.deal.entity;
 
-import java.time.LocalDate;
-
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,12 +38,12 @@ public class Deal {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message="pole nie może być puste")
 	@Column(name="from_date")
-	private LocalDate fromDate;
+	private Date fromDate;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message="pole nie może być puste")
 	@Column(name="to_date")
-	private LocalDate toDate;
+	private Date toDate;
 	
 	@NotNull(message="pole nie może być puste")
 	@Pattern(regexp = "[0-9]+", message = "to nie jest poprawna wartość")
@@ -92,22 +89,22 @@ public class Deal {
 	}
 
 
-	public LocalDate getFromDate() {
+	public Date getFromDate() {
 		return fromDate;
 	}
 
 
-	public void setFromDate(LocalDate fromDate) {
+	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
 
 
-	public LocalDate getToDate() {
+	public Date getToDate() {
 		return toDate;
 	}
 
 
-	public void setToDate(LocalDate toDate) {
+	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
 

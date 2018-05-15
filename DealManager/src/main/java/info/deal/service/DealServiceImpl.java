@@ -4,10 +4,8 @@ package info.deal.service;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -85,24 +83,19 @@ public class DealServiceImpl implements DealService {
 			DealDto dealDto;
 			while ((dealDto = beanReader.read(DealDto.class, headers, processors)) != null) {
 
-				Date inputFrom = dealDto.getFromDateTemp();// Converse FromDate from Date to LocaleDate
-				LocalDate dateFrom = inputFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				dealDto.setFromDate(dateFrom);
-
-				Date inputTo = dealDto.getToDateTemp();// Converse ToDate from Date to LocaleDate
-				LocalDate dateTo = inputTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				dealDto.setToDate(dateTo);
 				results.add(dealDto);
 
 				Deal deal = new Deal();
-				Systems system = new Systems();
 				deal.setOrderNumber(dealDto.getOrderNumber());
 				deal.setFromDate(dealDto.getFromDate());
 				deal.setToDate(dealDto.getToDate());
 				deal.setAmount(dealDto.getAmount());
 				deal.setAmountPeriod(dealDto.getAmountPeriod());
 				deal.setActive(dealDto.getActive());
+				
+				Systems system = new Systems();
 				system.setId(dealDto.getSystems());
+				
 				deal.setSystems(system);
 				dealDAO.saveDeal(deal);
 			}
@@ -113,7 +106,6 @@ public class DealServiceImpl implements DealService {
 			System.out.println("I/O exception at import occur");
 			e.printStackTrace();
 		}
-		System.out.println(results.size());
 		return results;
 	}
 

@@ -75,7 +75,7 @@ public class SystemController {
 	 * 
 	 */
 	@PostMapping("/saveSystem")
-	public String addDeal(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
+	public String addSystem(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
 			System.out.println(theSystems);
 			return "systemForm";

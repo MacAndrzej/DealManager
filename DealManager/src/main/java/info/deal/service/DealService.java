@@ -2,6 +2,7 @@ package info.deal.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import info.deal.dto.DealDto;
@@ -17,6 +18,7 @@ public interface DealService {
 	 * Returns a list of all deals entries.
 	 * 
 	 * @return List found deals.
+	 * @throws ParseException 
 	 */
 	public List<Deal> getDeals();
 
