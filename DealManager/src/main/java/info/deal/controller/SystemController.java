@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import info.deal.entity.Systems;
 import info.deal.service.SystemService;
+
 /**
  * 
  * @author Andrzej
@@ -27,6 +28,11 @@ public class SystemController {
 
 	@Autowired
 	private SystemService systemService;
+	
+	@Autowired
+	public SystemController(SystemService systemService) {
+		this.systemService = systemService;
+	}
 
 	/**
 	 * Takes the request,calls service,set model and returns view name to

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import info.deal.entity.Systems;
+import info.deal.exception.SystemNotFoundException;
 
 /**
  * 
@@ -37,7 +38,7 @@ public class SystemDAOImpl implements SystemDAO {
 	/**
 	 * Finds a deal entry.
 	 */
-	public Systems findById(long theId) {
+	public Systems findById(long theId){
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		/* create a query */

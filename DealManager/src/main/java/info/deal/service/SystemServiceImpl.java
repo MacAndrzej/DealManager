@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import info.deal.dao.SystemDAO;
 import info.deal.entity.Systems;
+import info.deal.exception.SystemNotFoundException;
 /**
  * 
  * @author Andrzej
@@ -34,7 +35,7 @@ public class SystemServiceImpl implements SystemService {
 		return systems;
 	}
 
-	public Systems findById(long theId) {
+	public Systems findById(long theId)  {
 		Systems theSystem = systemDAO.findById(theId);
 		return theSystem;
 	}
