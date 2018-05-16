@@ -43,7 +43,7 @@ public class SystemController {
 	 * @return View name to DispatcherServlet.
 	 */
 	@RequestMapping("/list")
-	public String listSystems(Model theModel) {
+	public String addSystems(Model theModel) {
 		List<Systems> theSystems = systemService.getSystems();
 		theModel.addAttribute("systems", theSystems);
 		return "listSystems";
@@ -75,7 +75,7 @@ public class SystemController {
 	 * 
 	 */
 	@PostMapping("/saveSystem")
-	public String addSystem(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
+	public String updateSystem(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
 			System.out.println(theSystems);
 			return "systemForm";
