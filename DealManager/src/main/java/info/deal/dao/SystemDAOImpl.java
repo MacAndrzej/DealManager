@@ -3,6 +3,7 @@ package info.deal.dao;
 import java.util.List;
 
 import org.hibernate.query.Query;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import info.deal.entity.Systems;
 import info.deal.exception.SystemNotFoundException;
+import info.deal.service.DealServiceImpl;
 
 /**
  * 
@@ -17,6 +19,8 @@ import info.deal.exception.SystemNotFoundException;
  */
 @Repository
 public class SystemDAOImpl implements SystemDAO {
+	
+	final static Logger logger=Logger.getLogger(DealServiceImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -25,6 +29,7 @@ public class SystemDAOImpl implements SystemDAO {
 	 * Returns a list of all systems entries.
 	 */
 	public List<Systems> getSystems() {
+		logger.info("Entering to SystemDAOImpl, into getSystems method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		/* create a query */
@@ -39,6 +44,7 @@ public class SystemDAOImpl implements SystemDAO {
 	 * Finds a deal entry.
 	 */
 	public Systems findById(long theId){
+		logger.info("Entering to SystemDAOImpl, into findById method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		/* create a query */
@@ -53,10 +59,12 @@ public class SystemDAOImpl implements SystemDAO {
 	 * Saves a deal entry.
 	 */
 	public void saveSystem(Systems theSystems) {
+		logger.info("Entering to SystemDAOImpl, into saveSystems method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("DAO: " + theSystems);
 		currentSession.saveOrUpdate(theSystems);
+		logger.info("Save System successful"+theSystems.toString());
 	}
 
 }
