@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.ParseDate;
@@ -37,10 +38,13 @@ import info.deal.entity.Systems;
 @Transactional
 public class DealServiceImpl implements DealService {
 
+	final static Logger logger=Logger.getLogger(DealServiceImpl.class);
+	
 	@Autowired
 	private DealDAO dealDAO;
 
 	public List<Deal> getDeals() {
+		logger.info("Entering to DealServiceImpl, getDeals()");
 		List<Deal> deals = new ArrayList<Deal>();
 		for (Deal d : dealDAO.getDeals()) {
 			deals.add(d);
@@ -49,6 +53,7 @@ public class DealServiceImpl implements DealService {
 	}
 
 	public List<Deal> getActiveDeals() {
+		logger.info("Entering to DealServiceImpl, getActiveDeals()");
 		List<Deal> deals = new ArrayList<Deal>();
 		for (Deal d : dealDAO.getActiveDeals()) {
 			deals.add(d);
@@ -57,16 +62,19 @@ public class DealServiceImpl implements DealService {
 	}
 
 	public Deal findById(long theId) {
+		logger.info("Entering to DealServiceImpl, findById()");
 		Deal theDeal = dealDAO.findById(theId);
 		return theDeal;
 	}
 
 	public Deal saveDeal(Deal theDeal) {
+		logger.info("Entering to DealServiceImpl, saveDeal()");
 		dealDAO.saveDeal(theDeal);
 		return theDeal;
 	}
 
 	public Deal disableDeal(long theId) {
+		logger.info("Entering to DealServiceImpl, disableDeal()");
 		Deal theDeal = dealDAO.findById(theId);
 		theDeal.setActive(0);
 		return theDeal;
@@ -75,6 +83,7 @@ public class DealServiceImpl implements DealService {
 	public List<DealDto> importCsv() throws FileNotFoundException, IOException {
 		final String CSV_FILENAME = "E:\\data.txt";
 		final CsvPreference PIPE_DELIMITED = new CsvPreference.Builder('"', ';', "\n").build();
+		logger.info("Entering to DealServiceImpl, importCsv()");
 
 		List<DealDto> results = new ArrayList<DealDto>();// list to display results of conversion
 		try (ICsvBeanReader beanReader = new CsvBeanReader(new FileReader(CSV_FILENAME), PIPE_DELIMITED)) {
