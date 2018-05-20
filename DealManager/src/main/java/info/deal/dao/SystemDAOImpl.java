@@ -19,8 +19,8 @@ import info.deal.service.DealServiceImpl;
  */
 @Repository
 public class SystemDAOImpl implements SystemDAO {
-	
-	final static Logger logger=Logger.getLogger(DealServiceImpl.class);
+
+	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -43,7 +43,7 @@ public class SystemDAOImpl implements SystemDAO {
 	/**
 	 * Finds a deal entry.
 	 */
-	public Systems findById(long theId){
+	public Systems findById(long theId) {
 		logger.info("Entering to SystemDAOImpl, into findById method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -64,7 +64,7 @@ public class SystemDAOImpl implements SystemDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		System.out.println("DAO: " + theSystems);
 		currentSession.saveOrUpdate(theSystems);
-		logger.info("Save System successful"+theSystems.toString());
+		logger.info("Save System successful" + theSystems.toString());
 	}
 
 }
