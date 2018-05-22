@@ -48,7 +48,7 @@ public class SystemController {
 	 * @return View name to DispatcherServlet.
 	 */
 	@RequestMapping("/list")
-	public String addSystems(Model theModel) {
+	public String listOfSystems(Model theModel) {
 		List<Systems> theSystems = systemService.getSystems();
 		theModel.addAttribute("systems", theSystems);
 		return "listSystems";
