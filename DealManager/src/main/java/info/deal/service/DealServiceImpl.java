@@ -1,6 +1,5 @@
 package info.deal.service;
 
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,8 +37,8 @@ import info.deal.entity.Systems;
 @Transactional
 public class DealServiceImpl implements DealService {
 
-	final static Logger logger=Logger.getLogger(DealServiceImpl.class);
-	
+	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
+
 	@Autowired
 	private DealDAO dealDAO;
 
@@ -76,7 +75,9 @@ public class DealServiceImpl implements DealService {
 	public Deal disableDeal(long theId) {
 		logger.info("Entering to DealServiceImpl, disableDeal()");
 		Deal theDeal = dealDAO.findById(theId);
-		theDeal.setActive(0);
+		if (theDeal != null) {
+			theDeal.setActive(0);
+		}
 		return theDeal;
 	}
 
@@ -84,16 +85,13 @@ public class DealServiceImpl implements DealService {
 		final String CSV_FILENAME = "E:\\data.txt";
 		final CsvPreference PIPE_DELIMITED = new CsvPreference.Builder('"', ';', "\n").build();
 		logger.info("Entering to DealServiceImpl, importCsv()");
-
 		List<DealDto> results = new ArrayList<DealDto>();// list to display results of conversion
 		try (ICsvBeanReader beanReader = new CsvBeanReader(new FileReader(CSV_FILENAME), PIPE_DELIMITED)) {
 			final String[] headers = beanReader.getHeader(true);
 			final CellProcessor[] processors = getProcessors();
 			DealDto dealDto;
 			while ((dealDto = beanReader.read(DealDto.class, headers, processors)) != null) {
-
 				results.add(dealDto);
-
 				Deal deal = new Deal();
 				deal.setOrderNumber(dealDto.getOrderNumber());
 				deal.setFromDate(dealDto.getFromDate());
@@ -101,10 +99,8 @@ public class DealServiceImpl implements DealService {
 				deal.setAmount(dealDto.getAmount());
 				deal.setAmountPeriod(dealDto.getAmountPeriod());
 				deal.setActive(dealDto.getActive());
-				
 				Systems system = new Systems();
 				system.setId(dealDto.getSystems());
-				
 				deal.setSystems(system);
 				dealDAO.saveDeal(deal);
 			}

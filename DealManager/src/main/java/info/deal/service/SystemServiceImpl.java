@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
 
 import info.deal.dao.SystemDAO;
 import info.deal.entity.Systems;
-import info.deal.exception.SystemNotFoundException;
+
 /**
  * 
  * @author Andrzej
  * 
- *  Service layer of the application.
+ *         Service layer of the application.
  *
  */
 @Service
 @Transactional
 public class SystemServiceImpl implements SystemService {
-	
-	final static Logger logger=Logger.getLogger(SystemServiceImpl.class);
+
+	final static Logger logger = Logger.getLogger(SystemServiceImpl.class);
 
 	@Autowired
 	private SystemDAO systemDAO;
@@ -39,7 +39,7 @@ public class SystemServiceImpl implements SystemService {
 		return systems;
 	}
 
-	public Systems findById(long theId)  {
+	public Systems findById(long theId) {
 		logger.info("Entering to SystemServiceImpl, findById()");
 		Systems theSystem = systemDAO.findById(theId);
 		return theSystem;

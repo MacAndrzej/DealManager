@@ -6,18 +6,26 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import info.deal.entity.Deal;
+import info.deal.exception.IdNotFoundException;
 import info.deal.service.DealService;
+import info.deal.service.DealServiceImpl;
 import info.deal.service.SystemService;
 
 /**
@@ -28,6 +36,8 @@ import info.deal.service.SystemService;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+
+	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
 
 	@Autowired
 	private DealService dealService;
@@ -88,10 +98,18 @@ public class OrderController {
 	 * @param theModel
 	 *            Model to fulfill by updated deal.
 	 * @return View name to DispatcherServlet.
+	 * @throws IdNotFoundException
+	 *             Entry with theId not found.
+	 * 
 	 */
 	@GetMapping("/showFormForUpdateOrder")
-	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel) {
+	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel)
+			throws IdNotFoundException {
+		logger.info("Entering to showFormForUpdateOrder");
 		Deal theDeal = dealService.findById(theId);
+		if (theDeal == null) {
+			throw new IdNotFoundException();
+		}
 		theModel.addAttribute("order", theDeal);
 		theModel.addAttribute("allSystems", systemService.getSystems());
 		return "dealForm";
@@ -106,10 +124,15 @@ public class OrderController {
 	 * @param theModel
 	 *            Model to fulfill by disabled deal.
 	 * @return Redirect to view.
+	 * @throws IdNotFoundException
+	 *             Entry with theId not found.
 	 */
 	@GetMapping("/disableOrder")
-	public String disableOrder(@RequestParam("dealId") long theId, Model theModel) {
+	public String disableOrder(@RequestParam("dealId") long theId, Model theModel) throws IdNotFoundException {
 		Deal theDeal = dealService.disableDeal(theId);
+		if (theDeal == null) {
+			throw new IdNotFoundException();
+		}
 		return "redirect:/order/listActive";
 	}
 
@@ -143,6 +166,16 @@ public class OrderController {
 		Integer importResult = dealService.importCsv().size();
 		theModel.addAttribute("results", importResult);
 		return "importOrders";
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(IdNotFoundException.class)
+	public ModelAndView handleOrderNotFoundException(IdNotFoundException e) {
+		ModelAndView theModel = new ModelAndView();
+		theModel.addObject("exc", e);
+		theModel.setViewName("404");
+
+		return theModel;
 	}
 
 }

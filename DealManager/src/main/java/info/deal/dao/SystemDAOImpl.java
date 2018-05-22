@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import info.deal.entity.Systems;
-import info.deal.exception.SystemNotFoundException;
 import info.deal.service.DealServiceImpl;
 
 /**
@@ -62,7 +61,6 @@ public class SystemDAOImpl implements SystemDAO {
 		logger.info("Entering to SystemDAOImpl, into saveSystems method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-		System.out.println("DAO: " + theSystems);
 		currentSession.saveOrUpdate(theSystems);
 		logger.info("Save System successful" + theSystems.toString());
 	}

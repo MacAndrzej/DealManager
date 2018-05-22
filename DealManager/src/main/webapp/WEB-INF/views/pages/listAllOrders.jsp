@@ -3,6 +3,7 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
@@ -44,8 +45,8 @@
 					<td>${status.count}</td>
 					<td>${listDeals.systems.getSystemName()}</td>
 					<td>${listDeals.orderNumber}</td>
-					<td>${listDeals.fromDate}</td>
-					<td>${listDeals.toDate}</td>
+					<td><fmt:formatDate value="${listDeals.fromDate}" pattern="yyyy-MM-dd"/></td>
+					<td><fmt:formatDate value="${listDeals.toDate}"  pattern="yyyy-MM-dd"/></td>
 					<td>${listDeals.amount} zł</td>
 					<td><c:choose>
 							<c:when test="${listDeals.amountPeriod=='YEAR'}">na rok</c:when>
