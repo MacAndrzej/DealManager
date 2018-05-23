@@ -5,7 +5,7 @@ import java.util.Date;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
-public class DealEntityBuilderImpl implements DealEntityBuilder{
+public class DealEntityBuilderImpl implements DealEntityBuilder {
 
 	private Deal deal;
 
@@ -45,7 +45,12 @@ public class DealEntityBuilderImpl implements DealEntityBuilder{
 
 	public DealEntityBuilderImpl systems(Systems systems) {
 		deal.setSystems(systems);
-		;
+		return this;
+	}
+
+	@Override
+	public DealEntityBuilderImpl active(Integer active) {
+		deal.setActive(active);
 		return this;
 	}
 

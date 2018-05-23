@@ -83,7 +83,7 @@ public class OrderController {
 	 * @return View name to DispatcherServlet.
 	 */
 	@GetMapping("/showFormForAddOrder")
-	public String showFormForAddChild(Model theModel) {
+	public String showFormForAddOrder(Model theModel) {
 		theModel.addAttribute("order", new Deal());
 		theModel.addAttribute("allSystems", systemService.getSystems());
 		return "dealForm";
@@ -105,7 +105,7 @@ public class OrderController {
 	@GetMapping("/showFormForUpdateOrder")
 	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel)
 			throws IdNotFoundException {
-		logger.info("Entering to showFormForUpdateOrder");
+		
 		Deal theDeal = dealService.findById(theId);
 		if (theDeal == null) {
 			throw new IdNotFoundException();

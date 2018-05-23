@@ -14,5 +14,6 @@ public interface DealEntityBuilder {
 	DealEntityBuilderImpl toDate(final Date toDate);
 	DealEntityBuilderImpl amount(final String amount);
 	DealEntityBuilderImpl amountPeriod(final String amountPeriod);
+	DealEntityBuilderImpl active(final Integer active);
 	DealEntityBuilderImpl systems(final Systems systems);
 }
