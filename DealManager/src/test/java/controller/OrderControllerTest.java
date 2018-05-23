@@ -1,8 +1,5 @@
 package controller;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.RETURNS_DEFAULTS;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,22 +13,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Id;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import info.deal.controller.OrderController;
-import info.deal.dto.DealDto;
 import info.deal.dto.DealEntityBuilderImpl;
 import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Deal;
@@ -162,20 +155,30 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testShowFormForUpdateOrder() throws Exception {
-		Systems first = new SystemEntityBuilderImpl().id(1L).build();
-		Systems second = new SystemEntityBuilderImpl().id(2L).build();
-		List<Systems> expectedSystems = new ArrayList<>();
-		expectedSystems = Arrays.asList(first, second);
+	public void testShowFormForUpdateOrder_EntryExists() throws Exception {
+		Deal first=new DealEntityBuilderImpl().id(1L).build();
+		
+		when(dealService.findById(1L)).thenReturn(first);
 
-		when(systemService.getSystems()).thenReturn(expectedSystems);
+		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=1"))
+		.andExpect(view().name("dealForm"))
+		.andExpect(model().attributeExists("order"))
+		.andExpect(model().attributeExists("allSystems"))
+		.andExpect(status().isOk())
+		.andExpect(model().size(2));
 
-		mockMvc.perform(get("/order/showFormForAddOrder")).andExpect(status().isOk()).andExpect(model().size(2))
-				.andExpect(model().attributeExists("order")).andExpect(model().attributeExists("allSystems"))
-				.andExpect(view().name("dealForm"));
+		verify(dealService, times(1)).findById(1L);
+	}
+	
+	@Test
+	public void testShowFormForUpdateOrder_EntryDoesNotExist() throws Exception {
+		
+		when(dealService.findById(1L)).thenReturn(null);
 
-		verify(systemService, times(1)).getSystems();
+		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=1"))
+		.andExpect(status().isNotFound());
 
+		verify(dealService, times(1)).findById(1L);
 	}
 
 	@Test
