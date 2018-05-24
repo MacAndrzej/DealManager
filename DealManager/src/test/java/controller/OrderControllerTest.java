@@ -1,5 +1,6 @@
 package controller;
 
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import info.deal.controller.OrderController;
+import info.deal.dto.DealDto;
 import info.deal.dto.DealEntityBuilderImpl;
 import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Deal;
@@ -134,25 +136,10 @@ public class OrderControllerTest {
 		verify(dealService, times(1)).getActiveDeals();
 	}
 
-	@Test
-	public void testShowFormForAddDeal() throws Exception {
-		
-		Systems first=new SystemEntityBuilderImpl().id(1L).build();
-		Systems second=new SystemEntityBuilderImpl().id(2L).build();
-		List<Systems> expectedSystems = new ArrayList<>();
-		expectedSystems=Arrays.asList(first,second);
-		
-		when(systemService.getSystems()).thenReturn(expectedSystems);
-		
-		mockMvc.perform(get("/order/showFormForAddOrder"))
-		.andExpect(status().isOk())
-		.andExpect(model().size(2))
-		.andExpect(model().attributeExists("order"))
-		.andExpect(model().attributeExists("allSystems"))
-		.andExpect(view().name("dealForm"));
-		
-		verify(systemService, times(1)).getSystems();
-	}
+	
+
+	
+	
 
 	@Test
 	public void testShowFormForUpdateOrder_EntryExists() throws Exception {
@@ -191,6 +178,8 @@ public class OrderControllerTest {
 		.andExpect(redirectedUrl("/order/listActive"))
 		.andDo(print());
 		
+		verify(dealService, times(1)).disableDeal(1L);
+		
 	}
 	
 	@Test
@@ -202,10 +191,12 @@ public class OrderControllerTest {
 		.andExpect(status().isNotFound())
 		.andDo(print());
 		
+		verify(dealService, times(1)).disableDeal(1L);
+		
 	}
 
 	@Test
-	public void testAddDeal() throws Exception {
+	public void testAddDeal_NoErrorsAfterValidation() throws Exception {
 		
 		mockMvc.perform(post("/order/saveOrder")
 				.param("orderNumber", "1/2015")
@@ -214,6 +205,20 @@ public class OrderControllerTest {
 				.param("active","1"))
 		.andExpect(redirectedUrl("/order/listActive"));
 	}
+	
+	@Test
+	public void testAddDeal_ValidationErrors() throws Exception {
+		
+		mockMvc.perform(post("/order/saveOrder")
+				.param("orderNumber", "1/2015")
+				.param("amount", "3000")
+				.param("amountPeriod","MONTH")
+				.param("active","1")
+				.param("id", "bike"))
+		.andExpect(view().name("dealForm"));
+	}
+	
+
 
 }
 

@@ -87,7 +87,6 @@ public class SystemController {
 	@PostMapping("/saveSystem")
 	public String updateSystem(@Valid @ModelAttribute("system") Systems theSystems, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
-			System.out.println(theSystems);
 			return "systemForm";
 		}
 		systemService.saveSystem(theSystems);

@@ -1,18 +1,11 @@
 package controller;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNotNull;
-import static org.mockito.Matchers.isNull;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,18 +15,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceView;
 
 import info.deal.controller.SystemController;
 import info.deal.dto.SystemEntityBuilderImpl;
@@ -58,7 +47,7 @@ public class SystemControllerTest {
 	}
 
 	@Test
-	public void testListOfSystems() throws Exception {
+	public void testListOfSystems_ListIsNotEmpty() throws Exception {
 
 		Systems first = new SystemEntityBuilderImpl().id(1L).build();
 		Systems second = new SystemEntityBuilderImpl().id(2L).build();
@@ -72,11 +61,27 @@ public class SystemControllerTest {
 				.andExpect(model().attribute("systems", expectedSystems)).andDo(print());
 
 		verify(systemService, times(1)).getSystems();
+	}
+	
+	@Test
+	public void testListOfSystems_ListIsEmpty() throws Exception {
 
+		List<Systems> expectedSystems = new ArrayList<>();
+		
+		when(systemService.getSystems()).thenReturn(expectedSystems);
+
+		mockMvc.perform(get("/system/list"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("listSystems"))
+				.andExpect(model().size(1))
+				.andExpect(model().attributeExists("systems"))
+				.andExpect(model().attribute("systems", expectedSystems)).andDo(print());
+
+		verify(systemService, times(1)).getSystems();
 	}
 
 	@Test
-	public void TestShowFormForUpdateSystem() throws Exception {
+	public void TestShowFormForUpdateSystem_EntryExists() throws Exception {
 
 		Systems updated = new SystemEntityBuilderImpl().id(1L).build();
 
@@ -89,16 +94,33 @@ public class SystemControllerTest {
 	}
 	
 	@Test
-	public void TestShowFormForUpdateSystem_ShouldReturnHttpStatusCode404() throws Exception {
-		when(systemService.findById(1L)).thenThrow(new IdNotFoundException());
+	public void TestShowFormForUpdateSystem_EntryDoesNotExist() throws Exception,IdNotFoundException {
 		
-		mockMvc.perform(get("/system/showFormForUpdateSystem?systemId=1")).andExpect(status().isNotFound());
+		when(systemService.findById(1L)).thenReturn(null);
+		
+		mockMvc.perform(get("/system/showFormForUpdateSystem?systemId=1"))
+		.andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void TestAddSystem() throws Exception {
-		mockMvc.perform(post("/system/saveSystem")).andExpect(redirectedUrl("/system/list")).andExpect(status().is(201))
-				.andDo(print());
+	public void TestAddSystem_NoErrorsAfterValidation() throws Exception {
+		mockMvc.perform(post("/system/saveSystem")
+				.param("descriptionOfSystem", "1L")
+				.param("descriptionOfTechnology", "Java")
+				.param("systemName","Tomato")
+				.param("systemOwner","Farmer"))
+		.andExpect(redirectedUrl("/system/list"));
+	}
+	
+	@Test
+	public void TestAddSystem_ValidationErrors() throws Exception {
+		mockMvc.perform(post("/system/saveSystem")
+				.param("descriptionOfSystem", "1L")
+				.param("descriptionOfTechnology", "Java")
+				.param("systemName","Tomato")
+				.param("systemOwner","Farmer")
+				.param("id", "bike"))
+		.andExpect(view().name("systemForm"));
 	}
 	
 	

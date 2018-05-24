@@ -19,9 +19,7 @@ public class DealDto {
 	public DealDto(String orderNumber, Date fromDate, Date toDate, String amount, String amountPeriod, Integer active,
 			Long systems) {
 		this.orderNumber = orderNumber;
-
 		this.fromDate = fromDate;
-
 		this.toDate = toDate;
 		this.amount = amount;
 		this.amountPeriod = amountPeriod;
