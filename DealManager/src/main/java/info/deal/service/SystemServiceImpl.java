@@ -26,16 +26,17 @@ public class SystemServiceImpl implements SystemService {
 
 	final static Logger logger = Logger.getLogger(SystemServiceImpl.class);
 
+	public SystemServiceImpl(SystemDAO systemDAO) {
+		this.systemDAO = systemDAO;
+	}
+
 	@Autowired
 	private SystemDAO systemDAO;
 
 	public List<Systems> getSystems() {
 		logger.info("Entering to SystemServiceImpl, getSystems()");
 		List<Systems> systems = new ArrayList<Systems>();
-		for (Systems s : systemDAO.getSystems()) {
-			systems.add(s);
-		}
-
+		systems = systemDAO.getSystems();
 		return systems;
 	}
 

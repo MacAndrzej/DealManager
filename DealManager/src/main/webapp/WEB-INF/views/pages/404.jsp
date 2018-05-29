@@ -9,6 +9,6 @@
 <title>404 Error Page</title>
 </head>
 <body>
-	<h5>404 Exception.</h5>
+	<h5>404 - Entry not found.</h5>
 </body>
 </html>

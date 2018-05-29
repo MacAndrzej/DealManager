@@ -42,21 +42,21 @@ public class DealServiceImpl implements DealService {
 	@Autowired
 	private DealDAO dealDAO;
 
+	public DealServiceImpl(DealDAO dealDAO) {
+		this.dealDAO=dealDAO;
+	}
+
 	public List<Deal> getDeals() {
 		logger.info("Entering to DealServiceImpl, getDeals()");
 		List<Deal> deals = new ArrayList<Deal>();
-		for (Deal d : dealDAO.getDeals()) {
-			deals.add(d);
-		}
+		deals=dealDAO.getDeals();
 		return deals;
 	}
 
 	public List<Deal> getActiveDeals() {
 		logger.info("Entering to DealServiceImpl, getActiveDeals()");
 		List<Deal> deals = new ArrayList<Deal>();
-		for (Deal d : dealDAO.getActiveDeals()) {
-			deals.add(d);
-		}
+		deals=dealDAO.getActiveDeals();
 		return deals;
 	}
 

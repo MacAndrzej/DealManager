@@ -1,5 +1,6 @@
 package controller;
 
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,7 @@ import info.deal.entity.Systems;
 import info.deal.exception.IdNotFoundException;
 import info.deal.service.DealService;
 import info.deal.service.SystemService;
+import javassist.NotFoundException;
 
 public class OrderControllerTest {
 	
@@ -136,10 +138,6 @@ public class OrderControllerTest {
 		verify(dealService, times(1)).getActiveDeals();
 	}
 
-	
-
-	
-	
 
 	@Test
 	public void testShowFormForUpdateOrder_EntryExists() throws Exception {
@@ -160,7 +158,7 @@ public class OrderControllerTest {
 	@Test
 	public void testShowFormForUpdateOrder_EntryDoesNotExist() throws Exception {
 		
-		when(dealService.findById(1L)).thenReturn(null);
+		when(dealService.findById(1L)).thenThrow(IdNotFoundException.class);
 
 		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=1"))
 		.andExpect(status().isNotFound());
@@ -185,7 +183,7 @@ public class OrderControllerTest {
 	@Test
 	public void testDisableOrder_WhenEntryDoesNotExist() throws Exception,IdNotFoundException {
 		
-		when(dealService.disableDeal(1L)).thenReturn(null);
+		when(dealService.disableDeal(1L)).thenThrow(IdNotFoundException.class);
 		
 		mockMvc.perform(get("/order/disableOrder?dealId=1"))
 		.andExpect(status().isNotFound())

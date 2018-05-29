@@ -105,10 +105,10 @@ public class OrderController {
 	@GetMapping("/showFormForUpdateOrder")
 	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel)
 			throws IdNotFoundException {
-		
+
 		Deal theDeal = dealService.findById(theId);
 		if (theDeal == null) {
-			throw new IdNotFoundException();
+			throw new IdNotFoundException("Entry at :" + theId + " not found.");
 		}
 		theModel.addAttribute("order", theDeal);
 		theModel.addAttribute("allSystems", systemService.getSystems());
