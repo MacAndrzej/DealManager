@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.http.HttpStatus;
 
 import info.deal.entity.Deal;
 import info.deal.exception.IdNotFoundException;
@@ -37,7 +36,7 @@ import info.deal.service.SystemService;
 @RequestMapping("/order")
 public class OrderController {
 
-	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
+	final static Logger logger = Logger.getLogger(OrderController.class);
 
 	@Autowired
 	private DealService dealService;
@@ -108,7 +107,7 @@ public class OrderController {
 
 		Deal theDeal = dealService.findById(theId);
 		if (theDeal == null) {
-			throw new IdNotFoundException("Entry at :" + theId + " not found.");
+			throw new IdNotFoundException("Requested id :" + theId + " not found.");
 		}
 		theModel.addAttribute("order", theDeal);
 		theModel.addAttribute("allSystems", systemService.getSystems());
@@ -131,7 +130,7 @@ public class OrderController {
 	public String disableOrder(@RequestParam("dealId") long theId, Model theModel) throws IdNotFoundException {
 		Deal theDeal = dealService.disableDeal(theId);
 		if (theDeal == null) {
-			throw new IdNotFoundException();
+			throw new IdNotFoundException("Requested id :" + theId + " not found.");
 		}
 		return "redirect:/order/listActive";
 	}
@@ -171,10 +170,11 @@ public class OrderController {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(IdNotFoundException.class)
 	public ModelAndView handleOrderNotFoundException(IdNotFoundException e) {
+		logger.error("Handling not found exception");
+		logger.error(e.getMessage());
 		ModelAndView theModel = new ModelAndView();
 		theModel.addObject("exc", e);
 		theModel.setViewName("404");
-
 		return theModel;
 	}
 

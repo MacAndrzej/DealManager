@@ -48,8 +48,7 @@ public class SystemServiceImpl implements SystemService {
 
 	public Systems saveSystem(@Valid Systems theSystems) {
 		logger.info("Entering to SystemServiceImpl, saveSystem()");
-		systemDAO.saveSystem(theSystems);
-		return theSystems;
+		return systemDAO.saveSystem(theSystems);
 
 	}
 

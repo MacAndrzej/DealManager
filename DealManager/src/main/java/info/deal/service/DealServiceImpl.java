@@ -25,6 +25,7 @@ import info.deal.dao.DealDAO;
 import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
+import info.deal.exception.IdNotFoundException;
 
 /**
  * 
@@ -60,7 +61,7 @@ public class DealServiceImpl implements DealService {
 		return deals;
 	}
 
-	public Deal findById(long theId) {
+	public Deal findById(long theId)  {
 		logger.info("Entering to DealServiceImpl, findById()");
 		Deal theDeal = dealDAO.findById(theId);
 		return theDeal;

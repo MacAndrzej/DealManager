@@ -158,7 +158,7 @@ public class OrderControllerTest {
 	@Test
 	public void testShowFormForUpdateOrder_EntryDoesNotExist() throws Exception {
 		
-		when(dealService.findById(1L)).thenThrow(IdNotFoundException.class);
+		when(dealService.findById(anyLong())).thenReturn(null);
 
 		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=1"))
 		.andExpect(status().isNotFound());
@@ -183,7 +183,7 @@ public class OrderControllerTest {
 	@Test
 	public void testDisableOrder_WhenEntryDoesNotExist() throws Exception,IdNotFoundException {
 		
-		when(dealService.disableDeal(1L)).thenThrow(IdNotFoundException.class);
+		when(dealService.disableDeal(1L)).thenReturn(null);
 		
 		mockMvc.perform(get("/order/disableOrder?dealId=1"))
 		.andExpect(status().isNotFound())
@@ -191,6 +191,17 @@ public class OrderControllerTest {
 		
 		verify(dealService, times(1)).disableDeal(1L);
 		
+	}
+	
+	@Test
+	public void showFormForAddOrder() throws Exception {
+			
+		mockMvc.perform(get("/order/showFormForAddOrder"))
+		.andExpect(view().name("dealForm"))
+		.andExpect(model().attributeExists("order"))
+		.andExpect(model().attributeExists("allSystems"))
+		.andExpect(model().size(2))
+		.andExpect(status().is(200));
 	}
 
 	@Test
@@ -216,7 +227,12 @@ public class OrderControllerTest {
 		.andExpect(view().name("dealForm"));
 	}
 	
-
+	@Test
+	public void importCsvTxtOrder() throws Exception {
+		
+		mockMvc.perform(get("/order/showImportOrdersForm"))
+		.andExpect(view().name("importOrders"));
+	}
 
 }
 

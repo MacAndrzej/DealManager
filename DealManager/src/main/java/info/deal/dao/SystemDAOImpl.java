@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 import info.deal.service.DealServiceImpl;
 
@@ -19,7 +20,7 @@ import info.deal.service.DealServiceImpl;
 @Repository
 public class SystemDAOImpl implements SystemDAO {
 
-	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
+	final static Logger logger = Logger.getLogger(SystemDAOImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -40,29 +41,28 @@ public class SystemDAOImpl implements SystemDAO {
 	}
 
 	/**
-	 * Finds a deal entry.
+	 * Finds a system entry.
 	 */
 	public Systems findById(long theId) {
 		logger.info("Entering to SystemDAOImpl, into findById method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
-		/* create a query */
-		Query<Systems> theQuery = currentSession.createQuery("from Systems where id= :code", Systems.class);
-		theQuery.setParameter("code", theId);
-		/* execute query and get result list */
-		List<Systems> system = theQuery.getResultList();
-		return system.get(0);
+		/* get  system entry*/
+		Systems system = currentSession.get(Systems.class, theId);
+		return system;
 	}
 
 	/**
-	 * Saves a deal entry.
+	 * Saves a system entry.
+	 * @return 
 	 */
-	public void saveSystem(Systems theSystems) {
+	public Systems saveSystem(Systems theSystems) {
 		logger.info("Entering to SystemDAOImpl, into saveSystems method");
 		/* get the current hibernate session */
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(theSystems);
 		logger.info("Save System successful" + theSystems.toString());
+		return theSystems;
 	}
 
 }

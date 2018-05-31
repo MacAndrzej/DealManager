@@ -5,6 +5,7 @@ package service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,17 +42,15 @@ import info.deal.service.SystemServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class SystemServiceImplTest {
 
-	
 	private SystemServiceImpl systemService;
-	
+
 	@Mock
 	private SystemDAO systemDAO;
-
 
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		systemService=new SystemServiceImpl(systemDAO);
+		systemService = new SystemServiceImpl(systemDAO);
 	}
 
 	/**
@@ -59,41 +58,42 @@ public class SystemServiceImplTest {
 	 */
 	@Test
 	public void testGetSystems() {
-//	for
+		// for
 		Systems first = new SystemEntityBuilderImpl().id(1L).build();
 		Systems second = new SystemEntityBuilderImpl().id(2L).build();
 		List<Systems> expectedSystems = new ArrayList<>();
 		expectedSystems = Arrays.asList(first, second);
-			
-//	when
+
+		// when
 		when(systemService.getSystems()).thenReturn(expectedSystems);
-		
-		List<Systems> actual=systemService.getSystems();
-		
-//		then
-		assertEquals(actual.size(),2);
-		verify(systemDAO,times(1)).getSystems();
-	} 
+
+		List<Systems> actual = systemService.getSystems();
+
+		// then
+		assertEquals(actual.size(), 2);
+		verify(systemDAO, times(1)).getSystems();
+	}
 
 	/**
 	 * Test method for {@link info.deal.service.SystemServiceImpl#findById(long)}.
 	 */
 	@Test
 	public void testFindById() {
-//		for
+		// for
 		Systems first = new SystemEntityBuilderImpl().id(1L).build();
 		Systems second = new SystemEntityBuilderImpl().id(2L).build();
 		List<Systems> expectedSystems = new ArrayList<>();
 		expectedSystems = Arrays.asList(first, second);
-		
-//		when
+
+		// when
 		when(systemService.findById(1L)).thenReturn(first);
-		
-		Systems actual=systemService.findById(1L);
-		
-//		then
+
+		Systems actual = systemService.findById(1L);
+
+		// then
 		assertEquals(actual, first);
-		verify(systemDAO,times(1)).findById(1L);
+		verify(systemDAO, times(1)).findById(1L);
+		verify(systemDAO, never()).getSystems();
 	}
 
 	/**
@@ -101,17 +101,17 @@ public class SystemServiceImplTest {
 	 * {@link info.deal.service.SystemServiceImpl#saveSystem(info.deal.entity.Systems)}.
 	 */
 	@Test
-	@Ignore
 	public void testSaveSystem() {
-//		for
-		Systems first = new SystemEntityBuilderImpl().id(1L).build();
-//		when
+		// for
+		Systems first = new SystemEntityBuilderImpl().id(1L).descriptionOfSystem("Tomato").build();
+		// when
 		when(systemService.saveSystem(first)).thenReturn(first);
-		
-		Systems actual=systemService.saveSystem(first);
-		
-//		then
+
+		Systems actual = systemService.saveSystem(first);
+
+		// then
 		assertEquals(actual, first);
+		verify(systemDAO, times(1)).saveSystem(first);
 	}
 
 }

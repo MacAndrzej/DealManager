@@ -36,8 +36,9 @@ public interface DealDAO {
 	 * 
 	 * @param theDeal
 	 *            The information of the saved deal entry.
+	 * @return Saved Deal
 	 * 
 	 */
-	public void saveDeal(Deal theDeal);
+	public Deal saveDeal(Deal theDeal);
 
 }

@@ -9,6 +9,7 @@
 <title>404 Error Page</title>
 </head>
 <body>
-	<h5>404 - Entry not found.</h5>
+	<h2>404 - Entry not found.</h2>
+	<h5>${exc.getMessage()}</h5>
 </body>
 </html>

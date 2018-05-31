@@ -1,6 +1,7 @@
 package service;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,6 +22,7 @@ import info.deal.dto.DealEntityBuilderImpl;
 import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
+import info.deal.exception.IdNotFoundException;
 import info.deal.service.DealServiceImpl;
 import info.deal.service.SystemService;
 
@@ -78,7 +80,7 @@ public class DealServiceImplTest {
 	}
 
 	@Test
-	public void testFindById() {
+	public void testFindById_EntryFound() throws IdNotFoundException {
 //		for
 		Deal first = new DealEntityBuilderImpl().id(1L).build();
 		Deal second = new DealEntityBuilderImpl().id(2L).build();
@@ -92,23 +94,46 @@ public class DealServiceImplTest {
 		
 //		then
 		assertEquals(actual, first);
+		assertNotNull("Nu recipe returned",actual);
+		assertEquals(Deal.class, actual.getClass());
+		verify(dealDAO,times(1)).findById(1L);
+	}
+	
+	@Test
+	public void testFindById_EntryFound_StringInsteadOfLong() throws IdNotFoundException {
+//		for
+		Deal first = new DealEntityBuilderImpl().id(1L).build();
+		Deal second = new DealEntityBuilderImpl().id(2L).build();
+		List<Deal> expectedSystems = new ArrayList<>();
+		expectedSystems = Arrays.asList(first, second);
+		
+//		when
+		when(dealService.findById(1L)).thenReturn(first);
+		
+		Deal actual=dealService.findById(1L);
+		
+//		then
+		assertEquals(actual, first);
+		assertNotNull("Nu recipe returned",actual);
+		assertEquals(Deal.class, actual.getClass());
 		verify(dealDAO,times(1)).findById(1L);
 	}
 
 	@Test
-	@Ignore
 	public void testSaveDeal() {
 //		for
-		Deal deal=new DealEntityBuilderImpl().id(1L).build();
+		Deal deal=new DealEntityBuilderImpl().id(1L).orderNumber("1/2018").build();
 		
 //		when
-		doReturn(deal).when(dealService).saveDeal(deal);
+//		doReturn(deal).when(dealService).saveDeal(deal);
+		when(dealService.saveDeal(deal)).thenReturn(deal);
 		
 		Deal after=dealService.saveDeal(deal);
-		
-		assertEquals(deal,after);
 
 //		then
+		assertEquals(deal,after);
+		assertEquals(Deal.class, after.getClass());
+		verify(dealDAO,times(1)).saveDeal(deal);
 	}
 
 	@Test

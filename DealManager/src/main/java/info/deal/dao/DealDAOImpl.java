@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import info.deal.entity.Deal;
-import info.deal.service.DealServiceImpl;
 
 /**
  * 
@@ -19,7 +18,7 @@ import info.deal.service.DealServiceImpl;
 @Repository
 public class DealDAOImpl implements DealDAO {
 
-	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
+	final static Logger logger = Logger.getLogger(DealDAOImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -68,11 +67,12 @@ public class DealDAOImpl implements DealDAO {
 	/**
 	 * Saves a deal entry.
 	 */
-	public void saveDeal(Deal theDeal) {
+	public Deal saveDeal(Deal theDeal) {
 		logger.info("Entering to saveDeal method");
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(theDeal);
 		logger.info("Save Deal successful" + theDeal.toString());
+		return theDeal;
 	}
 
 }

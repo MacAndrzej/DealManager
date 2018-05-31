@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import info.deal.entity.Systems;
 import info.deal.exception.IdNotFoundException;
+import info.deal.service.DealServiceImpl;
 import info.deal.service.SystemService;
 
 /**
@@ -30,6 +32,8 @@ import info.deal.service.SystemService;
 @Controller
 @RequestMapping("/system")
 public class SystemController {
+
+	final static Logger logger = Logger.getLogger(SystemController.class);
 
 	@Autowired
 	private SystemService systemService;
@@ -67,9 +71,11 @@ public class SystemController {
 	@GetMapping("/showFormForUpdateSystem")
 	public String showFormForUpdateSystem(@RequestParam("systemId") long theId, Model theModel)
 			throws IdNotFoundException {
+		logger.info("Entering to method before finding by id");
 		Systems theSystem = systemService.findById(theId);
 		if (theSystem == null) {
-			throw new IdNotFoundException();
+			logger.info("Value of id not existing: " + theSystem);
+			throw new IdNotFoundException("Requested id : " + theId + " not found.");
 		}
 		theModel.addAttribute("system", theSystem);
 		return "systemForm";
@@ -96,10 +102,11 @@ public class SystemController {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(IdNotFoundException.class)
 	public ModelAndView handleOrderNotFoundException(IdNotFoundException e) {
+		logger.error("Handling not found exception");
+		logger.error(e.getMessage());
 		ModelAndView theModel = new ModelAndView();
 		theModel.addObject("exc", e);
 		theModel.setViewName("404");
-
 		return theModel;
 	}
 }
