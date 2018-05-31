@@ -78,5 +78,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/404.jsp" />
 	</definition>
+	
+	<!-- Page error format exception  -->
+	<definition name="400" extends="template-def">
+		<put-attribute name="title" value="Error 400" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/400.jsp" />
+	</definition>
 
 </tiles-definitions>

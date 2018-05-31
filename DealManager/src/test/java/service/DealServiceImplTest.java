@@ -99,25 +99,6 @@ public class DealServiceImplTest {
 		verify(dealDAO,times(1)).findById(1L);
 	}
 	
-	@Test
-	public void testFindById_EntryFound_StringInsteadOfLong() throws IdNotFoundException {
-//		for
-		Deal first = new DealEntityBuilderImpl().id(1L).build();
-		Deal second = new DealEntityBuilderImpl().id(2L).build();
-		List<Deal> expectedSystems = new ArrayList<>();
-		expectedSystems = Arrays.asList(first, second);
-		
-//		when
-		when(dealService.findById(1L)).thenReturn(first);
-		
-		Deal actual=dealService.findById(1L);
-		
-//		then
-		assertEquals(actual, first);
-		assertNotNull("Nu recipe returned",actual);
-		assertEquals(Deal.class, actual.getClass());
-		verify(dealDAO,times(1)).findById(1L);
-	}
 
 	@Test
 	public void testSaveDeal() {

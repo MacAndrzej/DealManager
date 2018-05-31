@@ -161,9 +161,18 @@ public class OrderControllerTest {
 		when(dealService.findById(anyLong())).thenReturn(null);
 
 		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=1"))
-		.andExpect(status().isNotFound());
+		.andExpect(status().isNotFound())
+		.andExpect(view().name("404"));
 
 		verify(dealService, times(1)).findById(1L);
+	}
+	
+	@Test
+	public void testShowFormForUpdateOrder_EntryExist_StringInsteadOfLong() throws Exception {
+
+		mockMvc.perform(get("/order/showFormForUpdateOrder?dealId=kk"))
+		.andExpect(status().isBadRequest())
+		.andExpect(view().name("400"));
 	}
 
 	@Test
@@ -187,10 +196,18 @@ public class OrderControllerTest {
 		
 		mockMvc.perform(get("/order/disableOrder?dealId=1"))
 		.andExpect(status().isNotFound())
+		.andExpect(view().name("404"))
 		.andDo(print());
 		
 		verify(dealService, times(1)).disableDeal(1L);
+	}
+	
+	@Test
+	public void testDisableOrder_EntryExist_StringInsteadOfLong() throws Exception,IdNotFoundException {
 		
+		mockMvc.perform(get("/order/disableOrder?dealId=gg"))
+		.andExpect(status().isBadRequest())
+		.andExpect(view().name("400"));
 	}
 	
 	@Test

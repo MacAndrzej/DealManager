@@ -109,4 +109,15 @@ public class SystemController {
 		theModel.setViewName("404");
 		return theModel;
 	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(NumberFormatException.class)
+	public ModelAndView handleOrderNotFoundException(NumberFormatException e) {
+		logger.error("Handling number format exception");
+		logger.error(e.getMessage());
+		ModelAndView theModel = new ModelAndView();
+		theModel.addObject("exc", e);
+		theModel.setViewName("400");
+		return theModel;
+	}
 }
