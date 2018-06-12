@@ -23,6 +23,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import info.deal.controller.ControllerExceptionHandler;
 import info.deal.controller.SystemController;
 import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Systems;
@@ -42,7 +43,8 @@ public class SystemControllerTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		mockMvc = MockMvcBuilders.standaloneSetup(systemController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(systemController)
+				.setControllerAdvice(new ControllerExceptionHandler()).build();
 	}
 
 	@Test
@@ -109,7 +111,7 @@ public class SystemControllerTest {
 	public void TestAddSystem_NoErrorsAfterValidation() throws Exception {
 		mockMvc.perform(post("/system/saveSystem").param("descriptionOfSystem", "1L")
 				.param("descriptionOfTechnology", "Java").param("systemName", "Tomato").param("systemOwner", "Farmer"))
-				.andExpect(redirectedUrl("/system/list"));
+				.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/system/list"));
 	}
 
 	@Test

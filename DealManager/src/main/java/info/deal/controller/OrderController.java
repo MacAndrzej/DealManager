@@ -147,6 +147,9 @@ public class OrderController {
 	@PostMapping("/saveOrder")
 	public String addDeal(@Valid @ModelAttribute("order") Deal theDeal, BindingResult theBindingResult) {
 		if (theBindingResult.hasErrors()) {
+			theBindingResult.getAllErrors().forEach(objectError -> {
+				logger.debug(objectError.toString());
+			});
 			return "dealForm";
 		}
 		dealService.saveDeal(theDeal);
@@ -165,28 +168,6 @@ public class OrderController {
 		Integer importResult = dealService.importCsv().size();
 		theModel.addAttribute("results", importResult);
 		return "importOrders";
-	}
-
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(IdNotFoundException.class)
-	public ModelAndView handleOrderNotFoundException(IdNotFoundException e) {
-		logger.error("Handling not found exception");
-		logger.error(e.getMessage());
-		ModelAndView theModel = new ModelAndView();
-		theModel.addObject("exc", e);
-		theModel.setViewName("404");
-		return theModel;
-	}
-	
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(NumberFormatException.class)
-	public ModelAndView handleNumberFormatException(NumberFormatException e) {
-		logger.error("Handling number format exception");
-		logger.error(e.getMessage());
-		ModelAndView theModel = new ModelAndView();
-		theModel.addObject("exc", e);
-		theModel.setViewName("400");
-		return theModel;
 	}
 
 }

@@ -6,6 +6,7 @@ import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
 public interface DealEntityBuilder {
+	
 	Deal build();
 	
 	DealEntityBuilderImpl id(final Long id);
