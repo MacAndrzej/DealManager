@@ -3,7 +3,6 @@ package info.deal.service;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import info.deal.dao.DealDAO;
 import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
-import info.deal.exception.IdNotFoundException;
 
 /**
  * 
@@ -86,7 +84,9 @@ public class DealServiceImpl implements DealService {
 		final String CSV_FILENAME = "E:\\data.txt";
 		final CsvPreference PIPE_DELIMITED = new CsvPreference.Builder('"', ';', "\n").build();
 		logger.info("Entering to DealServiceImpl, importCsv()");
+		
 		List<DealDto> results = new ArrayList<DealDto>();// list to display results of conversion
+		
 		try (ICsvBeanReader beanReader = new CsvBeanReader(new FileReader(CSV_FILENAME), PIPE_DELIMITED)) {
 			final String[] headers = beanReader.getHeader(true);
 			final CellProcessor[] processors = getProcessors();
@@ -106,10 +106,10 @@ public class DealServiceImpl implements DealService {
 				dealDAO.saveDeal(deal);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found to Mapping from Csv to Java Bean");
+			logger.info("File not found to Mapping from Csv to Java Bean");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("I/O exception at import occur");
+			logger.info("I/O exception at import occur");
 			e.printStackTrace();
 		}
 		return results;
