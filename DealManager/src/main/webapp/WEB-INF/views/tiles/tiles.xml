@@ -50,6 +50,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/dealForm.jsp" />
 	</definition>
+	
+	<!-- Form update Order -->
+	<definition name="dealForm" extends="template-def">
+		<put-attribute name="title" value="Update order" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/dealForm.jsp" />
+	</definition>
 
 	<!-- Form update System -->
 	<definition name="systemForm" extends="template-def">
@@ -57,6 +64,26 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/systemForm.jsp" />
 	</definition>
-
+	
+	<!-- Page import csv/txt -->
+	<definition name="importOrders" extends="template-def">
+		<put-attribute name="title" value="Import Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/importOrders.jsp" />
+	</definition>
+	
+	<!-- Page error not found  -->
+	<definition name="404" extends="template-def">
+		<put-attribute name="title" value="Error 404" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/404.jsp" />
+	</definition>
+	
+	<!-- Page error format exception  -->
+	<definition name="400" extends="template-def">
+		<put-attribute name="title" value="Error 400" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/400.jsp" />
+	</definition>
 
 </tiles-definitions>

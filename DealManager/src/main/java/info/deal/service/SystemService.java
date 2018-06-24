@@ -17,7 +17,7 @@ public interface SystemService {
 	 * 
 	 * @return
 	 */
-	List<Systems> getSystems();
+	public List<Systems> getSystems();
 
 	/**
 	 * 
@@ -25,7 +25,7 @@ public interface SystemService {
 	 *            The theId of the wanted system entry.
 	 * @return The found system.
 	 */
-	Systems findById(long theId);
+	public Systems findById(long theId);
 
 	/**
 	 * 
@@ -33,6 +33,6 @@ public interface SystemService {
 	 *            The information of the saved system entry.
 	 * @return The saved system entry.
 	 */
-	Systems saveSystem(@Valid Systems theSystems);
+	public Systems saveSystem(@Valid Systems theSystems);
 
 }

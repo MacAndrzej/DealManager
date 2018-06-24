@@ -10,14 +10,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Dodaj umowę</title>
+<title>Aktualizuj dane systemu</title>
 
 <link type="text/css" rel="stylesheet" href="/css/inputFormDetails.css">
 
 </head>
 <body>
 	<div id="container">
-		<h2>Wypełnij dane umowy:</h2>
+		<h2>Popraw dane systemu:</h2>
 		<form:form action="saveSystem" modelAttribute="system" method="POST">
 			<form:hidden path="id" />
 
@@ -29,17 +29,17 @@
 								class="errorInputValidation" /></td>
 					</tr>
 					<tr>
-						<td><label>Nazwa systemu:</label></td>
+						<td><label>Opis systemu:</label></td>
 						<td><form:input path="descriptionOfSystem" /> <form:errors path="descriptionOfSystem"
 								class="errorInputValidation" /></td>
 					</tr>
 					<tr>
-						<td><label>Nazwa systemu:</label></td>
+						<td><label>Opis technologii:</label></td>
 						<td><form:input path="descriptionOfTechnology" /> <form:errors path="descriptionOfTechnology"
 								class="errorInputValidation" /></td>
 					</tr>
 					<tr>
-						<td><label>Nazwa systemu:</label></td>
+						<td><label>Właściciel systemu:</label></td>
 						<td><form:input path="systemOwner" /> <form:errors path="systemOwner"
 								class="errorInputValidation" /></td>
 					</tr>

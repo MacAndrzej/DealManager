@@ -33,7 +33,8 @@ public interface SystemDAO {
 	 * 
 	 * @param theSystems
 	 *            The information of the saved system entry.
+	 * @return Saved entry.
 	 */
-	public void saveSystem(@Valid Systems theSystems);
+	public Systems saveSystem(@Valid Systems theSystems);
 
 }

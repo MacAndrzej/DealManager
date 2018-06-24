@@ -1,8 +1,13 @@
 package info.deal.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
+import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
+import info.deal.exception.IdNotFoundException;
 
 /**
  * @author Andrzej Interface
@@ -14,6 +19,7 @@ public interface DealService {
 	 * Returns a list of all deals entries.
 	 * 
 	 * @return List found deals.
+	 * @throws ParseException 
 	 */
 	public List<Deal> getDeals();
 
@@ -30,8 +36,9 @@ public interface DealService {
 	 * @param theId
 	 *            The theId of the wanted deals entry.
 	 * @return The found deal.
+	 * @throws IdNotFoundException 
 	 */
-	public Deal findById(long theId);
+	public Deal findById(long theId) throws IdNotFoundException;
 
 	/**
 	 * Disables a deal entry.
@@ -50,5 +57,13 @@ public interface DealService {
 	 * @return The saved deal entry.
 	 */
 	public Deal saveDeal(Deal theDeal);
+
+	/**
+	 * Importes deals from a file
+	 * @throws FileNotFoundException 
+	 * @throws IOException 
+	 * 
+	 */
+	public List<DealDto> importCsv() throws FileNotFoundException, IOException;
 
 }
