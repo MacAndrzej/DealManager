@@ -17,6 +17,8 @@ import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 
  * @author Andrzej
@@ -24,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name="deal")
+@JsonIgnoreProperties
 public class Deal {
 	
 	@Id
@@ -58,7 +61,7 @@ public class Deal {
 	private Integer active=1;
 	
 	@NotNull(message="pole nie może być puste")
-	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.EAGER)
+	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch=FetchType.LAZY)
 	@JoinColumn(name = "system_id")
 	private Systems systems;
 	/**

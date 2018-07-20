@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import info.deal.dto.DealEntityBuilderImpl;
+import info.deal.builder.DealEntityBuilderImpl;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 

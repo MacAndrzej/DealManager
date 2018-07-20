@@ -1,13 +1,12 @@
 package entity;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
@@ -112,7 +111,7 @@ public class DealTest {
 	@Test
 	public void testSetSystems() {
 		// given
-		Systems systemsValue = new SystemEntityBuilderImpl().id(1L).build();
+		Systems systemsValue = new Systems();
 
 		// when
 		deal.setSystems(systemsValue);

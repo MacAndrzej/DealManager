@@ -5,11 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.ParseDate;
 import org.supercsv.cellprocessor.ParseInt;
@@ -20,8 +20,10 @@ import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
 
+import info.deal.api.v1.controller.mapper.DealMapper;
+import info.deal.api.v1.controller.model.DealDto;
+import info.deal.builder.DealBuilder;
 import info.deal.dao.DealDAO;
-import info.deal.dto.DealDto;
 import info.deal.entity.Deal;
 import info.deal.entity.Systems;
 
@@ -36,33 +38,29 @@ import info.deal.entity.Systems;
 @Transactional
 public class DealServiceImpl implements DealService {
 
+	public DealServiceImpl(DealMapper dealMapper, DealDAO dealDAO) {
+		this.dealMapper = dealMapper;
+		this.dealDAO = dealDAO;
+	}
+
 	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
 
-	@Autowired
-	private DealDAO dealDAO;
+	private final DealMapper dealMapper;
+	private final DealDAO dealDAO;
 
-	public DealServiceImpl(DealDAO dealDAO) {
-		this.dealDAO=dealDAO;
-	}
-
-	public List<Deal> getDeals() {
+	public List<DealDto> getDeals() {
 		logger.info("Entering to DealServiceImpl, getDeals()");
-		List<Deal> deals = new ArrayList<Deal>();
-		deals=dealDAO.getDeals();
-		return deals;
+		return dealDAO.getDeals().stream().map(dealMapper::dealToDealDto).collect(Collectors.toList());
 	}
 
-	public List<Deal> getActiveDeals() {
+	public List<DealDto> getActiveDeals() {
 		logger.info("Entering to DealServiceImpl, getActiveDeals()");
-		List<Deal> deals = new ArrayList<Deal>();
-		deals=dealDAO.getActiveDeals();
-		return deals;
+		return dealDAO.getActiveDeals().stream().map(dealMapper::dealToDealDto).collect(Collectors.toList());
 	}
 
-	public Deal findById(long theId)  {
+	public DealDto findById(long theId) {
 		logger.info("Entering to DealServiceImpl, findById()");
-		Deal theDeal = dealDAO.findById(theId);
-		return theDeal;
+		return dealMapper.dealToDealDto(dealDAO.findById(theId));
 	}
 
 	public Deal saveDeal(Deal theDeal) {
@@ -80,18 +78,18 @@ public class DealServiceImpl implements DealService {
 		return theDeal;
 	}
 
-	public List<DealDto> importCsv() throws FileNotFoundException, IOException {
+	public List<DealBuilder> importCsv() throws FileNotFoundException, IOException {
 		final String CSV_FILENAME = "E:\\data.txt";
 		final CsvPreference PIPE_DELIMITED = new CsvPreference.Builder('"', ';', "\n").build();
 		logger.info("Entering to DealServiceImpl, importCsv()");
-		
-		List<DealDto> results = new ArrayList<DealDto>();// list to display results of conversion
-		
+
+		List<DealBuilder> results = new ArrayList<DealBuilder>();// list to display results of conversion
+
 		try (ICsvBeanReader beanReader = new CsvBeanReader(new FileReader(CSV_FILENAME), PIPE_DELIMITED)) {
 			final String[] headers = beanReader.getHeader(true);
 			final CellProcessor[] processors = getProcessors();
-			DealDto dealDto;
-			while ((dealDto = beanReader.read(DealDto.class, headers, processors)) != null) {
+			DealBuilder dealDto;
+			while ((dealDto = beanReader.read(DealBuilder.class, headers, processors)) != null) {
 				results.add(dealDto);
 				Deal deal = new Deal();
 				deal.setOrderNumber(dealDto.getOrderNumber());

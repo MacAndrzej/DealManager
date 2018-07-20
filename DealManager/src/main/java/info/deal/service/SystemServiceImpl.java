@@ -1,15 +1,16 @@
 package info.deal.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import info.deal.api.v1.controller.mapper.SystemMapper;
+import info.deal.api.v1.controller.model.SystemDto;
 import info.deal.dao.SystemDAO;
 import info.deal.entity.Systems;
 
@@ -24,32 +25,41 @@ import info.deal.entity.Systems;
 @Transactional
 public class SystemServiceImpl implements SystemService {
 
-	final static Logger logger = Logger.getLogger(SystemServiceImpl.class);
-
-	public SystemServiceImpl(SystemDAO systemDAO) {
+	public SystemServiceImpl(SystemDAO systemDAO, SystemMapper systemMapper) {
 		this.systemDAO = systemDAO;
+		this.systemMapper = systemMapper;
 	}
 
-	@Autowired
-	private SystemDAO systemDAO;
+	final static Logger logger = Logger.getLogger(SystemServiceImpl.class);
+	
+	private final SystemDAO systemDAO;
+	private final SystemMapper systemMapper;
 
-	public List<Systems> getSystems() {
+	public List<SystemDto> getSystems() {
 		logger.info("Entering to SystemServiceImpl, getSystems()");
-		List<Systems> systems = new ArrayList<Systems>();
-		systems = systemDAO.getSystems();
-		return systems;
+		return systemDAO.getSystems().stream().map(systemMapper::systemToSystemDto).collect(Collectors.toList());
 	}
 
-	public Systems findById(long theId) {
+	public SystemDto findById(Long theId) {
 		logger.info("Entering to SystemServiceImpl, findById()");
-		Systems theSystem = systemDAO.findById(theId);
-		return theSystem;
+		return systemMapper.systemToSystemDto(systemDAO.findById(theId));
 	}
 
-	public Systems saveSystem(@Valid Systems theSystems) {
+	public SystemDto saveSystemDto(@Valid SystemDto theSystemDto) {
 		logger.info("Entering to SystemServiceImpl, saveSystem()");
-		return systemDAO.saveSystem(theSystems);
 
+		Systems theSystem = systemMapper.systemDtoToSystem(theSystemDto);
+		Systems savedSystem = systemDAO.saveSystem(theSystem);
+		SystemDto returnDto = systemMapper.systemToSystemDto(savedSystem);
+		returnDto.setSystemUrl("/api/systems/" + savedSystem.getId());
+
+		return returnDto;
+	}
+
+	public Systems saveSystem(@Valid Systems theSystem) {
+		logger.info("Entering to SystemServiceImpl, saveSystem()");
+
+		return systemDAO.saveSystem(theSystem);
 	}
 
 }

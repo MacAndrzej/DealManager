@@ -3,8 +3,7 @@ package service;
  * 
  */
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -13,25 +12,19 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import info.deal.dao.DealDAO;
+import info.deal.api.v1.controller.mapper.SystemMapper;
+import info.deal.api.v1.controller.model.SystemDto;
+import info.deal.builder.SystemEntityBuilderImpl;
 import info.deal.dao.SystemDAO;
-import info.deal.dto.SystemEntityBuilderImpl;
 import info.deal.entity.Systems;
-import info.deal.service.DealService;
 import info.deal.service.SystemService;
 import info.deal.service.SystemServiceImpl;
 
@@ -39,38 +32,37 @@ import info.deal.service.SystemServiceImpl;
  * @author Andrzej
  *
  */
-@RunWith(MockitoJUnitRunner.class)
+// @RunWith(MockitoJUnitRunner.class)
 public class SystemServiceImplTest {
 
-	private SystemServiceImpl systemService;
+	private final Long ID = 1L;
 
 	@Mock
-	private SystemDAO systemDAO;
+	SystemDAO systemDAO;
+
+	SystemService systemService;
 
 	@Before
-	public void setup() {
+	public void setup() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		systemService = new SystemServiceImpl(systemDAO);
+		systemService = new SystemServiceImpl(systemDAO, SystemMapper.INSTANCE);
 	}
 
 	/**
 	 * Test method for {@link info.deal.service.SystemServiceImpl#getSystems()}.
 	 */
 	@Test
-	public void testGetSystems() {
-		// for
-		Systems first = new SystemEntityBuilderImpl().id(1L).build();
-		Systems second = new SystemEntityBuilderImpl().id(2L).build();
-		List<Systems> expectedSystems = new ArrayList<>();
-		expectedSystems = Arrays.asList(first, second);
+	public void testGetSystems() throws Exception {
+		// given
+		List<Systems> systemList = Arrays.asList(new Systems(), new Systems(), new Systems());
 
 		// when
-		when(systemService.getSystems()).thenReturn(expectedSystems);
+		when(systemDAO.getSystems()).thenReturn(systemList);
 
-		List<Systems> actual = systemService.getSystems();
+		List<SystemDto> systemDtos = systemService.getSystems();
 
 		// then
-		assertEquals(actual.size(), 2);
+		assertEquals(systemDtos.size(), 3);
 		verify(systemDAO, times(1)).getSystems();
 	}
 
@@ -78,20 +70,18 @@ public class SystemServiceImplTest {
 	 * Test method for {@link info.deal.service.SystemServiceImpl#findById(long)}.
 	 */
 	@Test
-	public void testFindById() {
-		// for
+	public void testFindById_EntryFound() {
+		// given
 		Systems first = new SystemEntityBuilderImpl().id(1L).build();
-		Systems second = new SystemEntityBuilderImpl().id(2L).build();
-		List<Systems> expectedSystems = new ArrayList<>();
-		expectedSystems = Arrays.asList(first, second);
 
 		// when
-		when(systemService.findById(1L)).thenReturn(first);
+		when(systemDAO.findById(1L)).thenReturn(first);
 
-		Systems actual = systemService.findById(1L);
+		SystemDto actualDto = systemService.findById(1L);
 
 		// then
-		assertEquals(actual, first);
+		assertEquals(first.getId(), actualDto.getId());
+		assertEquals(ID, actualDto.getId());
 		verify(systemDAO, times(1)).findById(1L);
 		verify(systemDAO, never()).getSystems();
 	}
@@ -102,12 +92,13 @@ public class SystemServiceImplTest {
 	 */
 	@Test
 	public void testSaveSystem() {
-		// for
-		Systems first = new SystemEntityBuilderImpl().id(1L).descriptionOfSystem("Tomato").build();
-		// when
-		when(systemService.saveSystem(first)).thenReturn(first);
+		// given
+		Systems first = new SystemEntityBuilderImpl().id(1L).build();
 
-		Systems actual = systemService.saveSystem(first);
+		// when
+		when(systemDAO.saveSystem(first)).thenReturn(first);
+
+		Systems actual = systemDAO.saveSystem(first);
 
 		// then
 		assertEquals(actual, first);

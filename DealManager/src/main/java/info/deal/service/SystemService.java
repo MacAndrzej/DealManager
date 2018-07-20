@@ -2,8 +2,7 @@ package info.deal.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
+import info.deal.api.v1.controller.model.SystemDto;
 import info.deal.entity.Systems;
 
 /**
@@ -15,9 +14,9 @@ public interface SystemService {
 	/**
 	 * Returns a list of systems entries.
 	 * 
-	 * @return
+	 * @return List of systems
 	 */
-	public List<Systems> getSystems();
+	public List<SystemDto> getSystems();
 
 	/**
 	 * 
@@ -25,14 +24,23 @@ public interface SystemService {
 	 *            The theId of the wanted system entry.
 	 * @return The found system.
 	 */
-	public Systems findById(long theId);
+	public SystemDto findById(Long theId);
 
 	/**
 	 * 
-	 * @param theSystems
+	 * @param theSystemDto
 	 *            The information of the saved system entry.
 	 * @return The saved system entry.
 	 */
-	public Systems saveSystem(@Valid Systems theSystems);
+	public SystemDto saveSystemDto(SystemDto theSystemDto);
+	
+	/**
+	 * 
+	 * @param theSystems
+	 * The information of the saved system entry.
+	 * @return The saves system entry.
+	 */
+	public Systems saveSystem(Systems theSystems);
+	
 
 }

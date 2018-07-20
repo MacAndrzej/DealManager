@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * 
  * @author Andrzej
@@ -38,6 +40,7 @@ public class Systems {
 	@Column(name = "system_owner")
 	private String systemOwner;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "systems", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH },fetch=FetchType.LAZY,orphanRemoval = true)
 	private List<Deal> deals;

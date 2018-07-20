@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import info.deal.api.v1.controller.model.SystemDto;
 import info.deal.entity.Systems;
 import info.deal.exception.IdNotFoundException;
 import info.deal.service.SystemService;
@@ -34,12 +35,13 @@ public class SystemController {
 
 	final static Logger logger = Logger.getLogger(SystemController.class);
 
-	@Autowired
-	private SystemService systemService;
+	
+	private final SystemService systemService;
 
 	@Autowired
 	public SystemController(SystemService systemService) {
 		this.systemService = systemService;
+		
 	}
 
 	/**
@@ -52,7 +54,7 @@ public class SystemController {
 	 */
 	@RequestMapping("/list")
 	public String listOfSystems(Model theModel) {
-		List<Systems> theSystems = systemService.getSystems();
+		List<SystemDto> theSystems = systemService.getSystems();
 		theModel.addAttribute("systems", theSystems);
 		return "listSystems";
 	}
@@ -71,7 +73,7 @@ public class SystemController {
 	public String showFormForUpdateSystem(@RequestParam("systemId") long theId, Model theModel)
 			throws IdNotFoundException {
 		logger.info("Entering to method before finding by id");
-		Systems theSystem = systemService.findById(theId);
+		SystemDto theSystem = systemService.findById(theId);
 		if (theSystem == null) {
 			logger.info("Value of id not existing: " + theSystem);
 			throw new IdNotFoundException("Requested id : " + theId + " not found.");

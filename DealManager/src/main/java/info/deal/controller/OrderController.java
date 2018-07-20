@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import info.deal.api.v1.controller.model.DealDto;
 import info.deal.entity.Deal;
 import info.deal.exception.IdNotFoundException;
 import info.deal.service.DealService;
@@ -49,7 +50,7 @@ public class OrderController {
 	 */
 	@GetMapping("/list")
 	public String listDeals(Model theModel) {
-		List<Deal> list = dealService.getDeals();
+		List<DealDto> list = dealService.getDeals();
 		theModel.addAttribute("deals", list);
 		return "listAllOrders";
 	}
@@ -64,7 +65,7 @@ public class OrderController {
 	 */
 	@GetMapping("/listActive")
 	public String listActiveDeals(Model theModel) {
-		List<Deal> list = dealService.getActiveDeals();
+		List<DealDto> list = dealService.getActiveDeals();
 		theModel.addAttribute("deals", list);
 		return "listActiveOrders";
 	}
@@ -100,7 +101,7 @@ public class OrderController {
 	public String showFormForUpdateOrder(@RequestParam("dealId") long theId, Model theModel)
 			throws IdNotFoundException {
 
-		Deal theDeal = dealService.findById(theId);
+		DealDto theDeal = dealService.findById(theId);
 		if (theDeal == null) {
 			throw new IdNotFoundException("Requested id :" + theId + " not found.");
 		}

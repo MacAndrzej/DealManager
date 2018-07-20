@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import info.deal.dto.DealDto;
+import info.deal.api.v1.controller.model.DealDto;
+import info.deal.builder.DealBuilder;
 import info.deal.entity.Deal;
 import info.deal.exception.IdNotFoundException;
 
@@ -21,14 +22,14 @@ public interface DealService {
 	 * @return List found deals.
 	 * @throws ParseException 
 	 */
-	public List<Deal> getDeals();
+	public List<DealDto> getDeals();
 
 	/**
 	 * Returns a list of all active deals entries.
 	 * 
 	 * @return List found active deals.
 	 */
-	public List<Deal> getActiveDeals();
+	public List<DealDto> getActiveDeals();
 
 	/**
 	 * Finds a deal entry.
@@ -38,7 +39,7 @@ public interface DealService {
 	 * @return The found deal.
 	 * @throws IdNotFoundException 
 	 */
-	public Deal findById(long theId) throws IdNotFoundException;
+	public DealDto findById(long theId) throws IdNotFoundException;
 
 	/**
 	 * Disables a deal entry.
@@ -64,6 +65,6 @@ public interface DealService {
 	 * @throws IOException 
 	 * 
 	 */
-	public List<DealDto> importCsv() throws FileNotFoundException, IOException;
+	public List<DealBuilder> importCsv() throws FileNotFoundException, IOException;
 
 }
