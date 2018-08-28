@@ -23,10 +23,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import info.deal.api.v1.controller.model.SystemDto;
-import info.deal.builder.SystemDtoBuilderImpl;
+import info.deal.builder.SystemEntityBuilderImpl;
 import info.deal.controller.ControllerExceptionHandler;
 import info.deal.controller.SystemController;
+import info.deal.entity.Systems;
 import info.deal.exception.IdNotFoundException;
 import info.deal.service.SystemService;
 
@@ -50,9 +50,9 @@ public class SystemControllerTest {
 	@Test
 	public void testListOfSystems_ListIsNotEmpty() throws Exception {
 
-		SystemDto first = new SystemDtoBuilderImpl().id(1L).build();
-		SystemDto second = new SystemDtoBuilderImpl().id(2L).build();
-		List<SystemDto> expectedSystems = new ArrayList<>();
+		Systems first = new SystemEntityBuilderImpl().id(1L).build();
+		Systems second = new SystemEntityBuilderImpl().id(2L).build();
+		List<Systems> expectedSystems = new ArrayList<>();
 		expectedSystems = Arrays.asList(first, second);
 
 		when(systemService.getSystems()).thenReturn(expectedSystems);
@@ -67,7 +67,7 @@ public class SystemControllerTest {
 	@Test
 	public void testListOfSystems_ListIsEmpty() throws Exception {
 
-		List<SystemDto> expectedSystems = new ArrayList<>();
+		List<Systems> expectedSystems = new ArrayList<>();
 
 		when(systemService.getSystems()).thenReturn(expectedSystems);
 
@@ -81,7 +81,7 @@ public class SystemControllerTest {
 	@Test
 	public void TestShowFormForUpdateSystem_EntryExists() throws Exception {
 
-		SystemDto updated = new SystemDtoBuilderImpl().id(1L).build();
+		Systems updated = new SystemEntityBuilderImpl().id(1L).build();
 
 		when(systemService.findById(1L)).thenReturn(updated);
 

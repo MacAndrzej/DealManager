@@ -2,7 +2,6 @@ package info.deal.service;
 
 import java.util.List;
 
-import info.deal.api.v1.controller.model.SystemDto;
 import info.deal.entity.Systems;
 
 /**
@@ -16,7 +15,7 @@ public interface SystemService {
 	 * 
 	 * @return List of systems
 	 */
-	public List<SystemDto> getSystems();
+	public List<Systems> getSystems();
 
 	/**
 	 * 
@@ -24,15 +23,7 @@ public interface SystemService {
 	 *            The theId of the wanted system entry.
 	 * @return The found system.
 	 */
-	public SystemDto findById(Long theId);
-
-	/**
-	 * 
-	 * @param theSystemDto
-	 *            The information of the saved system entry.
-	 * @return The saved system entry.
-	 */
-	public SystemDto saveSystemDto(SystemDto theSystemDto);
+	public Systems findById(Long theId);
 	
 	/**
 	 * 

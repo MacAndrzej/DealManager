@@ -5,11 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.ParseDate;
 import org.supercsv.cellprocessor.ParseInt;
@@ -20,8 +20,6 @@ import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
 
-import info.deal.api.v1.controller.mapper.DealMapper;
-import info.deal.api.v1.controller.model.DealDto;
 import info.deal.builder.DealBuilder;
 import info.deal.dao.DealDAO;
 import info.deal.entity.Deal;
@@ -38,29 +36,24 @@ import info.deal.entity.Systems;
 @Transactional
 public class DealServiceImpl implements DealService {
 
-	public DealServiceImpl(DealMapper dealMapper, DealDAO dealDAO) {
-		this.dealMapper = dealMapper;
-		this.dealDAO = dealDAO;
-	}
-
 	final static Logger logger = Logger.getLogger(DealServiceImpl.class);
 
-	private final DealMapper dealMapper;
-	private final DealDAO dealDAO;
+	@Autowired
+	DealDAO dealDAO;
 
-	public List<DealDto> getDeals() {
+	public List<Deal> getDeals() {
 		logger.info("Entering to DealServiceImpl, getDeals()");
-		return dealDAO.getDeals().stream().map(dealMapper::dealToDealDto).collect(Collectors.toList());
+		return dealDAO.getDeals();
 	}
 
-	public List<DealDto> getActiveDeals() {
+	public List<Deal> getActiveDeals() {
 		logger.info("Entering to DealServiceImpl, getActiveDeals()");
-		return dealDAO.getActiveDeals().stream().map(dealMapper::dealToDealDto).collect(Collectors.toList());
+		return dealDAO.getActiveDeals();
 	}
 
-	public DealDto findById(long theId) {
+	public Deal findById(long theId) {
 		logger.info("Entering to DealServiceImpl, findById()");
-		return dealMapper.dealToDealDto(dealDAO.findById(theId));
+		return dealDAO.findById(theId);
 	}
 
 	public Deal saveDeal(Deal theDeal) {

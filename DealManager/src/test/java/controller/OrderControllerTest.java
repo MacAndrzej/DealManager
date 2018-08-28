@@ -1,6 +1,6 @@
 package controller;
 
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,15 +24,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import info.deal.api.v1.controller.model.DealDto;
-import info.deal.builder.DealDtoBuilderImpl;
 import info.deal.builder.DealEntityBuilderImpl;
 import info.deal.controller.ControllerExceptionHandler;
 import info.deal.controller.OrderController;
 import info.deal.entity.Deal;
 import info.deal.exception.IdNotFoundException;
 import info.deal.service.DealService;
-import info.deal.service.SystemService;
 
 public class OrderControllerTest {
 
@@ -56,9 +53,9 @@ public class OrderControllerTest {
 
 	@Test
 	public void testListDeals_ListIsNotEmpty() throws Exception {
-		DealDto first = new DealDto();
-		DealDto second = new DealDto();
-		List<DealDto> expectedDeal = new ArrayList<>();
+		Deal first = new Deal();
+		Deal second = new Deal();
+		List<Deal> expectedDeal = new ArrayList<>();
 		expectedDeal = Arrays.asList(first, second);
 
 		when(dealService.getDeals()).thenReturn(expectedDeal);
@@ -73,7 +70,7 @@ public class OrderControllerTest {
 	@Test
 	public void testListDeals_ListIsEmpty() throws Exception {
 
-		List<DealDto> expectedDeal = new ArrayList<>();
+		List<Deal> expectedDeal = new ArrayList<>();
 
 		when(dealService.getDeals()).thenReturn(expectedDeal);
 
@@ -86,9 +83,9 @@ public class OrderControllerTest {
 
 	@Test
 	public void testListActiveDeals_ListIsNotEmpty() throws Exception {
-		DealDto first = new DealDto();
-		DealDto second = new DealDto();
-		List<DealDto> expectedDeal = new ArrayList<>();
+		Deal first = new Deal();
+		Deal second = new Deal();
+		List<Deal> expectedDeal = new ArrayList<>();
 		expectedDeal = Arrays.asList(first, second);
 
 		when(dealService.getActiveDeals()).thenReturn(expectedDeal);
@@ -103,7 +100,7 @@ public class OrderControllerTest {
 	@Test
 	public void testListActiveDeals_ListIsNull() throws Exception {
 
-		List<DealDto> expectedDeal = new ArrayList<>();
+		List<Deal> expectedDeal = new ArrayList<>();
 
 		when(dealService.getActiveDeals()).thenReturn(expectedDeal);
 
@@ -116,7 +113,7 @@ public class OrderControllerTest {
 
 	@Test
 	public void testShowFormForUpdateOrder_EntryExists() throws Exception {
-		DealDto first = new DealDtoBuilderImpl().id(1L).build();
+		Deal first = new DealEntityBuilderImpl().id(1L).build();
 
 		when(dealService.findById(1L)).thenReturn(first);
 
